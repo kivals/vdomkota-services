@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  html-api:
+    build: ./html-api
+    container_name: vdomkota-docker-html-server
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+    networks:
+      - vdomkota-service-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: vdomkota-docker-nginx
+    ports:
+      - 80:80
+    volumes:
+    - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    - ./static/:/usr/share/nginx/static
+    depends_on:
+      - html-api
+    links:
+      - html-api:html-api
+    networks:
+      - vdomkota-service-network
+
+networks:
+  vdomkota-service-network:
+    driver: bridge

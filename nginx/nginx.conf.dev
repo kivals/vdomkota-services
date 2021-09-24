@@ -1,0 +1,28 @@
+server {
+    listen          80;
+    server_name     vdomkota.local www.vdomkota.local;
+
+    location / {
+        proxy_pass  http://html-api:3000/;
+    }
+
+    location /fonts/ {
+        root /usr/share/nginx/static/;
+    }
+
+    location ~ \.(css)$ {
+        root /usr/share/nginx/static/css/;
+    }
+
+    location ~ \.(webp|png|ico)$ {
+        root /usr/share/nginx/static/images/;
+    }
+
+    location ~ \.(js)$ {
+        root /usr/share/nginx/static/js/;
+    }
+
+    location ~ \.(mp4|webm)$ {
+        root /usr/share/nginx/static/videos/;
+    }
+}

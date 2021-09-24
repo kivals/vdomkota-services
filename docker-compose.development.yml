@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  html-api:
+    command: npm run dev
+    volumes:
+    - ./html-api:/usr/src/app
+
+  nginx:
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/nginx.conf
