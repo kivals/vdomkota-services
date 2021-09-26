@@ -3,6 +3,8 @@ version: '3'
 services:
   api:
     command: npm run start:dev
+    ports:
+      - 3000:3000
     volumes:
     - ./api:/usr/src/app/api
 
