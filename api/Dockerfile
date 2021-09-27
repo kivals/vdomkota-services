@@ -1,12 +1,17 @@
 FROM node:14-alpine
 
+RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
+
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
+
+USER node
 
 #for proxy ssl certificate
 RUN npm config set registry http://registry.npmjs.org/
+RUN npm set strict-ssl false
+RUN npm i
 
-RUN npm install
-
-COPY . .
+# Copy app source code
+COPY --chown=node:node . .
