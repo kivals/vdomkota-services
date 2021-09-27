@@ -50,3 +50,12 @@ export const generateCats = (): CreateCatDto[] => {
     },
   ];
 };
+
+export const generatePhotos = () => {
+  return [
+    {
+      path: '/Lapka/lapka-1.webp',
+      isDeleted: false,
+    },
+  ];
+};
