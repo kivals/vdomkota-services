@@ -6,7 +6,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-    - ./api:/usr/src/app/api
+    - ./api:/usr/src/app
 
   html-api:
     command: npm run dev
