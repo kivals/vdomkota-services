@@ -10,8 +10,8 @@ export const generateCats = (): CreateCatDto[] => {
       age: 21,
       hasHome: false,
       characteristics: [
-        { name: 'vaccinations', value: 'от того и от этого' },
-        { name: 'neutered', value: 'true' },
+        { alias: 'vaccinations', name: 'Вакцины', value: 'от того и от этого' },
+        { alias: 'neutered', name: 'Кастрирован/Стерилизована', value: 'true' },
       ],
     },
     {
@@ -21,9 +21,9 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 4,
       characteristics: [
-        { name: 'vaccinations', value: 'от того и от этого' },
-        { name: 'neutered', value: 'true' },
-        { name: 'hiddenInfections', value: 'нет' },
+        { alias: 'vaccinations', name: 'Вакцины', value: 'от того и от этого' },
+        { alias: 'neutered', name: 'Кастрирован/Стерилизована', value: 'true' },
+        { alias: 'hiddenInfections', name: 'Скрытые инфекции', value: 'нет' },
       ],
     },
     {
@@ -33,8 +33,8 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 14,
       characteristics: [
-        { name: 'neutered', value: 'true' },
-        { name: 'hiddenInfections', value: 'нет' },
+        { alias: 'neutered', name: 'Кастрирован/Стерилизована', value: 'true' },
+        { alias: 'hiddenInfections', name: 'Скрытые инфекции', value: 'нет' },
       ],
     },
     {
@@ -44,8 +44,8 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 17,
       characteristics: [
-        { name: 'neutered', value: 'true' },
-        { name: 'hiddenInfections', value: 'нет' },
+        { alias: 'neutered', name: 'Кастрирован/Стерилизована', value: 'true' },
+        { alias: 'hiddenInfections', name: 'Скрытые инфекции', value: 'нет' },
       ],
     },
   ];

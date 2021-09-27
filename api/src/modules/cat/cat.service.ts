@@ -19,6 +19,7 @@ export class CatService {
   }
 
   async generateCatsData(cats: CreateCatDto[]) {
+    await this.catModel.deleteMany();
     return this.catModel.insertMany(cats);
   }
 }

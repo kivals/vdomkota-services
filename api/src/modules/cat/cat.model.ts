@@ -3,6 +3,9 @@ import { prop } from '@typegoose/typegoose';
 
 class CatCharacteristic {
   @prop()
+  alias: string;
+
+  @prop()
   name: string;
 
   @prop()
