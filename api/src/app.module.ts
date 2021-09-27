@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './configs/mongo.config';
 import { envValidatorSchema } from './configs/env-validator.config';
+import { PhotoModule } from './modules/photo/photo.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { envValidatorSchema } from './configs/env-validator.config';
       inject: [ConfigService],
       useFactory: getMongoConfig,
     }),
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
