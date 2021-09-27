@@ -16,7 +16,7 @@ export class CatModel extends TimeStamps {
   @prop()
   name: string;
 
-  @prop()
+  @prop({ unique: true })
   alias: string;
 
   @prop()
