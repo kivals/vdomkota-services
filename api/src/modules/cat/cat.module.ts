@@ -17,5 +17,6 @@ import { CatModel } from './cat.model';
   ],
   controllers: [CatController],
   providers: [CatService],
+  exports: [TypegooseModule],
 })
 export class CatModule {}

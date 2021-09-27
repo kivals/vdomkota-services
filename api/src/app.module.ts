@@ -7,6 +7,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './configs/mongo.config';
 import { envValidatorSchema } from './configs/env-validator.config';
 import { PhotoModule } from './modules/photo/photo.module';
+import { MigrationModule } from './modules/migration/migration.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PhotoModule } from './modules/photo/photo.module';
       useFactory: getMongoConfig,
     }),
     PhotoModule,
+    MigrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

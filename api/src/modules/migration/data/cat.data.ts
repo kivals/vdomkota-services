@@ -1,4 +1,4 @@
-import { CreateCatDto } from '../dto/create-cat.dto';
+import { CreateCatDto } from '../../cat/dto/create-cat.dto';
 
 export const generateCats = (): CreateCatDto[] => {
   return [
