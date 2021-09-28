@@ -17,4 +17,23 @@ export class CatService {
   async create(dto: CreateCatDto) {
     return this.catModel.create(dto);
   }
+
+  async getCatsWithPhoto() {
+    return this.catModel
+      .aggregate()
+      .sort({ _id: 1 })
+      .limit(30)
+      .lookup({
+        from: 'Photo',
+        localField: '_id',
+        pipeline: [{ $sample: { size: 1 } }, { $project: { _id: 0, path: 1 } }],
+        foreignField: 'catId',
+        as: 'photos',
+      })
+      .project({
+        _id: 0,
+        name: 1,
+        photos: 1,
+      });
+  }
 }

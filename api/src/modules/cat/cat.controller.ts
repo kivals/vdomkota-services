@@ -9,4 +9,9 @@ export class CatController {
   async find() {
     return this.catService.findAll();
   }
+
+  @Get('slider-cats')
+  async getSliderCats() {
+    return this.catService.getCatsWithPhoto();
+  }
 }
