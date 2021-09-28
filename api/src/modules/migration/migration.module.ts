@@ -4,6 +4,7 @@ import { MigrationController } from './migration.controller';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { CatModel } from '../cat/cat.model';
 import { CatModule } from '../cat/cat.module';
+import { PhotoModel } from '../photo/photo.model';
 
 @Module({
   imports: [
@@ -12,6 +13,12 @@ import { CatModule } from '../cat/cat.module';
         typegooseClass: CatModel,
         schemaOptions: {
           collection: 'Cat',
+        },
+      },
+      {
+        typegooseClass: PhotoModel,
+        schemaOptions: {
+          collection: 'Photo',
         },
       },
     ]),
