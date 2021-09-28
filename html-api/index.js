@@ -19,9 +19,9 @@ app.use(logger);
 app.get('/', (req, res) => {
   console.log('BEFORE2');
   axios
-    .get('http://api:3000/')
+    .get('http://api:3000/cat/slider-cats')
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       res.json({
         data: response.data,
       });

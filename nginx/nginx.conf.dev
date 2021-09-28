@@ -3,7 +3,7 @@ server {
     server_name     vdomkota.local www.vdomkota.local;
 
     location / {
-        proxy_pass  http://html-api:3000/;
+        proxy_pass  http://html-api:4000/;
     }
 
     location /api/ {
