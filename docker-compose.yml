@@ -6,6 +6,8 @@ services:
     container_name: vdomkota-docker-api
     command: npm run start
     restart: unless-stopped
+    ports:
+      - 3000:3000
     environment:
       - PORT=3000
       - MONGO_URL=mongodb://api_db:27017/api
@@ -27,8 +29,11 @@ services:
     container_name: vdomkota-docker-html-api
     command: npm run start
     restart: unless-stopped
+    ports:
+      - 4000:4000
     environment:
-      - PORT=3000
+      - PORT=4000
+      - API_URL=http://api:3000/
     networks:
       - vdomkota-service-network
 
