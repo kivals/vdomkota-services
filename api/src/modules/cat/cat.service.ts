@@ -18,7 +18,7 @@ export class CatService {
     return this.catModel.create(dto);
   }
 
-  async getCatsWithPhoto() {
+  async getShortCatsInfo() {
     return this.catModel
       .aggregate()
       .sort({ _id: 1 })
@@ -33,6 +33,29 @@ export class CatService {
       .project({
         _id: 0,
         name: 1,
+        alias: 1,
+        photos: 1,
+      });
+  }
+
+  async getCatByAlias(alias: string) {
+    return this.catModel
+      .aggregate()
+      .match({ alias })
+      .limit(1)
+      .lookup({
+        from: 'Photo',
+        localField: '_id',
+        pipeline: [{ $limit: 20 }, { $project: { _id: 0, path: 1 } }],
+        foreignField: 'catId',
+        as: 'photos',
+      })
+      .project({
+        _id: 0,
+        name: 1,
+        age: 1,
+        info: 1,
+        characteristics: 1,
         photos: 1,
       });
   }

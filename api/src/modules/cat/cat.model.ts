@@ -16,6 +16,7 @@ export class CatModel extends TimeStamps {
   @prop()
   name: string;
 
+  // Должно быть с маленькой буквы
   @prop({ unique: true })
   alias: string;
 

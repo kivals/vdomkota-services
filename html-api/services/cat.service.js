@@ -10,6 +10,12 @@ const getShortCatInfo = async () => {
   }));
 };
 
+const getCatByAlias = async (alias) => {
+  const response = await axios.get(`${apiUrl}cat/${alias}`);
+  return response.data[0];
+};
+
 module.exports = {
-    getShortCatInfo,
-}
+  getShortCatInfo,
+  getCatByAlias,
+};

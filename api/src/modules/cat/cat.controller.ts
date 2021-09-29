@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CatService } from './cat.service';
 
 @Controller('cat')
@@ -11,7 +11,12 @@ export class CatController {
   }
 
   @Get('short-cat-info')
-  async getSliderCats() {
-    return this.catService.getCatsWithPhoto();
+  async getShortCatsInfo() {
+    return this.catService.getShortCatsInfo();
+  }
+
+  @Get(':alias')
+  async getCatByAlias(@Param('alias') alias: string) {
+    return this.catService.getCatByAlias(alias);
   }
 }
