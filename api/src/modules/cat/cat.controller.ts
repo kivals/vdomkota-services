@@ -12,7 +12,6 @@ export class CatController {
 
   @Get('slider-cats')
   async getSliderCats() {
-    console.log('REQUEST');
     return this.catService.getCatsWithPhoto();
   }
 }

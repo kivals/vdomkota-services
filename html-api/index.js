@@ -15,18 +15,7 @@ app.set('view engine', 'ejs');
 
 // Пишем в лог все запросы
 app.use(logger);
-// app.use('/', router);
-app.get('/', (req, res) => {
-  console.log('BEFORE2');
-  axios
-    .get('http://api:3000/cat/slider-cats')
-    .then((response) => {
-      //console.log(response);
-      res.json({
-        data: response.data,
-      });
-    })
-});
+app.use('/', router);
 
 app.listen(PORT, () => {
   console.info(`Сервер запущен на ${PORT} порту`);
