@@ -15,17 +15,11 @@ export class MigrationService {
 
   async generateCatsData(cats: CreateCatDto[]) {
     await this.catModel.deleteMany();
+    await this.photoModel.deleteMany();
     for (const cat of cats) {
       const { id, alias } = await this.catModel.create(cat);
       const photos = generatePhotos(id, alias);
       await this.photoModel.insertMany(photos);
-      console.log(photos);
-      console.log(
-        '-----------------------------------------------------------------------------------------',
-      );
     }
-    // const insertedCats = await this.catModel
-    // const ids = insertedCats.map((cat) => cat.id);
-    // return ids;
   }
 }
