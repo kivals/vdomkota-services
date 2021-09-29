@@ -1,19 +1,30 @@
-const axios = require('axios');
-const { apiUrl } = require('../configuration');
+const { getShortCatInfo } = require('../services/cat.service');
 
-const renderPage = async (req, res) => {
-  const response = await axios.get(`${apiUrl}cat/slider-cats`);
-  // Преобразуем формат полученных данных для html
-  const prettyCats = response.data.map(cat => ({
-    ...cat,
-    photoPath: cat.photos[0].path,
-  }));
-  res.render('index', {
-    title: 'Главная',
-    cats: prettyCats,
-  });
+const renderIndexPage = async (req, res, next) => {
+  try {
+    const shortCatInfo = await getShortCatInfo();
+    res.render('index', {
+      title: 'Главная',
+      cats: shortCatInfo,
+    });
+  } catch (e) {
+    return next(e);
+  }
+};
+
+const renderFindPage = async (req, res, next) => {
+  try {
+    const shortCatInfo = await getShortCatInfo();
+    res.render('find', {
+      title: 'Ищем хозяев',
+      cats: shortCatInfo,
+    });
+  } catch (e) {
+    return next(e);
+  }
 };
 
 module.exports = {
-  renderPage,
+  renderIndexPage,
+  renderFindPage,
 };

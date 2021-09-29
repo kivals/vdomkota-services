@@ -1,10 +1,14 @@
 const express = require('express');
 
 const router = express.Router();
-const { renderPage } = require('../controllers');
+const { renderIndexPage, renderFindPage } = require('../controllers');
 
 router.get('/', async (req, res) => {
-  renderPage(req, res);
+  renderIndexPage(req, res);
+});
+
+router.get('/find', async (req, res) => {
+  renderFindPage(req, res);
 });
 
 module.exports = router;

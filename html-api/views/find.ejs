@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<%- include('./layout/head', {title: title}) %>
+<body>
+<div class="wrapper">
+    <%- include('./layout/header') %>
+    <main class="page">
+        <main class="page page__find">
+            <section class="find">
+                <div class="find__container _container">
+                    <h1 class="find__title _title">Котики, которые ищут дом</h1>
+                    <div class="find__content">
+                        <% for(var cat of cats) { %>
+                            <article class="find__cat cat-item">
+                                <div class="cat-item__body">
+                                    <div class="cat-item__image _ibg">
+                                        <img src="<%= cat.photoPath %>" alt="Котик <%= cat.name %>">
+                                    </div>
+                                    <div class="cat-item__name"><%= cat.name %></div>
+                                    <div class="cat-item__overlay">
+                                        <a href="/cat-id.html" class="cat-item__button btn">Посмотреть котика</a>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }%>
+
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Лео/leo-1.webp" alt="Лео">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Лео</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="/cat-id.html" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Марфа/marpha-1.webp" alt="Марфа">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Марфа</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="#" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Лапка/lapka-1.webp" alt="Лапка">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Лапка</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="#" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Финик/phinik-1.webp" alt="Финик">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Финик</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="#" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Пират/pirat-1.webp" alt="Пират">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Пират</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="#" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                        <article class="find__cat cat-item">-->
+<!--                            <div class="cat-item__body">-->
+<!--                                <div class="cat-item__image _ibg">-->
+<!--                                    <img src="./img/cats/Мия/mia-1.webp" alt="Мия">-->
+<!--                                </div>-->
+<!--                                <div class="cat-item__name">Мия</div>-->
+<!--                                <div class="cat-item__overlay">-->
+<!--                                    <a href="#" class="cat-item__button btn">Посмотреть котика</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </article>-->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </main>
+    <%- include('./layout/footer', {title: title}) %>
+</div>
+<%- include('./layout/scripts') %>
+</body>
+</html>

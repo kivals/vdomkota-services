@@ -10,7 +10,7 @@ export class CatController {
     return this.catService.findAll();
   }
 
-  @Get('slider-cats')
+  @Get('short-cat-info')
   async getSliderCats() {
     return this.catService.getCatsWithPhoto();
   }

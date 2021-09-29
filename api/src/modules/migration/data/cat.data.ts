@@ -51,15 +51,6 @@ export const generateCats = (): CreateCatDto[] => {
   ];
 };
 
-export const generatePhotos = () => {
-  return [
-    {
-      path: '/Lapka/lapka-1.webp',
-      isDeleted: false,
-    },
-  ];
-};
-
 export const generatePhotos = (catId: string, alias: string) => {
   return [...Array(5)].map((value, index) => ({
     catId: catId,
