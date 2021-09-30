@@ -4,9 +4,43 @@
 <body>
 <div class="wrapper">
     <%- include('./layout/header') %>
-        <main class="page page__find">
+    <main class="page page__find">
+        <section class="cat-details__container _container">
+            <div class="cat-details__slider slider-cats">
+                <div class="slider-cats__body _swiper">
+                    <% for(var photo of cat.photos) { %>
+                        <div class="slider-cats__slide _ibg">
+                            <img src="<%= photo.path %>" alt="<%= cat.alias %>">
+                        </div>
+                    <% }%>
+                </div>
+                <div class="slider-cats__arrows slider-cats-arrows">
+                    <button type="button" class="slider-cats-arrows__item slider-cats-arrows__item_prev _icon-arrow-short"></button>
+                    <button type="button" class="slider-cats-arrows__item slider-cats-arrows__item_next _icon-arrow-short"></button>
+                </div>
+                <div class="slider-cats__dots"></div>
+            </div>
 
-        </main>
+            <div class="cat-details__description cat-description">
+                <h3 class="cat-description__name _title">Кличка: <%= cat.name %></h3>
+                <ul class="cat-description__list">
+                    <li><span>Возраст:</span> <%= cat.age %> месяц</li>
+                    <% for(var characteristic of cat.characteristics) { %>
+                        <li><span><%= characteristic.name%>: </span><%= characteristic.value%></li>
+                    <% }%>
+                </ul>
+                <div class="cat-description__text">
+                    <%- cat.info%>
+                </div>
+                <div class="cat-description__caution">
+                    По вопросам укотовления:<br><br>
+                    Tel: +79533269886 Елена (куратор)<br><br>
+                    ВАЖНО! Все животные приюта пристраиваются СТРОГО по Договору ответственного содержания и ненавязчивого отслеживания дальнейшей жизни кота! Надеемся на ваше понимание!
+                </div>
+                <a href="https://docs.google.com/forms/d/1PEqWVWYwrkqdPwlh09GGG520wq1OVmQsGlZrRPsMWWQ/edit" target="_blank" class="cat-description__button btn">Оставить заявку на котика</a>
+            </div>
+        </section>
+    </main>
     <%- include('./layout/footer', {title: title}) %>
 </div>
 <%- include('./layout/scripts') %>
