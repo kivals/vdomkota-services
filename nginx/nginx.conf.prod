@@ -1,8 +1,9 @@
 server {
     listen          80;
     server_name     vdomkota.ru www.vdomkota.ru;
+
     location / {
-        proxy_pass  http://html-api:3000/;
+        proxy_pass  http://html-api:4000/;
     }
 
     location /api/ {
@@ -17,12 +18,12 @@ server {
         root /usr/share/nginx/static/css/;
     }
 
-    location ~ \.(js)$ {
-        root /usr/share/nginx/static/js/;
-    }
-
     location ~ \.(webp|png|ico)$ {
         root /usr/share/nginx/static/images/;
+    }
+
+    location ~ \.(js)$ {
+        root /usr/share/nginx/static/js/;
     }
 
     location ~ \.(mp4|webm)$ {

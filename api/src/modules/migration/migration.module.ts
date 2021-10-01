@@ -5,7 +5,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { CatModel } from '../cat/cat.model';
 import { CatModule } from '../cat/cat.module';
 import { PhotoModel } from '../photo/photo.model';
-
+//TODO !!!ВАЖНО модуль должен быть доступен только для DEV-режима
 @Module({
   imports: [
     TypegooseModule.forFeature([

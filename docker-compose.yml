@@ -4,7 +4,7 @@ services:
   api:
     build: ./api
     container_name: vdomkota-docker-api
-    command: npm run start
+    command: npm run start:prod
     restart: unless-stopped
     environment:
       - PORT=3000
@@ -43,8 +43,10 @@ services:
     - ./static/:/usr/share/nginx/static
     depends_on:
       - html-api
+      - api
     links:
       - html-api:html-api
+      - api:api
     networks:
       - vdomkota-service-network
 
