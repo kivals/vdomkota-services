@@ -15,3 +15,5 @@ RUN npm i
 
 # Copy app source code
 COPY --chown=node:node . .
+
+RUN npm run build
