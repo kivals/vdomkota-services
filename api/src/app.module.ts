@@ -8,6 +8,7 @@ import { getMongoConfig } from './configs/mongo.config';
 import { envValidatorSchema } from './configs/env-validator.config';
 import { PhotoModule } from './modules/photo/photo.module';
 import { MigrationModule } from './modules/migration/migration.module';
+import { WinstonModule } from './modules/winston/winston.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { MigrationModule } from './modules/migration/migration.module';
     }),
     PhotoModule,
     MigrationModule,
+    WinstonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
