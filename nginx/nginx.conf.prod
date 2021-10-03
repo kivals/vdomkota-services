@@ -1,6 +1,6 @@
 server {
     listen          80;
-    server_name     vdomkota.ru www.vdomkota.ru;
+    server_name     https://vdomkota.ru http://vdomkota.ru www.vdomkota.ru;
     location / {
         proxy_pass  http://html-api:3000/;
     }
