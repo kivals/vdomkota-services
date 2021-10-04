@@ -18,7 +18,7 @@ server {
         root /usr/share/nginx/static/css/;
     }
 
-    location ~ \.(webp|png|ico)$ {
+    location ~ \.(webp|png|ico|svg)$ {
         root /usr/share/nginx/static/images/;
     }
 
@@ -28,5 +28,13 @@ server {
 
     location ~ \.(mp4|webm)$ {
         root /usr/share/nginx/static/videos/;
+    }
+
+    location /sitemap.xml {
+        root /usr/share/nginx/static/seo/;
+    }
+
+    location /robots.txt {
+        root /usr/share/nginx/static/seo/;
     }
 }

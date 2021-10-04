@@ -1,17 +1,21 @@
 const express = require('express');
 
 const router = express.Router();
-const { renderIndexPage, renderFindPage, renderCatByAliasPage } = require('../controllers');
+const {
+  renderIndexPage,
+  renderCatsPage,
+  renderCatByAliasPage,
+} = require('../controllers');
 
 router.get('/', async (req, res) => {
   renderIndexPage(req, res);
 });
 
-router.get('/find', async (req, res) => {
-  renderFindPage(req, res);
+router.get('/cats', async (req, res) => {
+  renderCatsPage(req, res);
 });
 
-router.get('/cat/:alias', async (req, res) => {
+router.get('/cats/:alias', async (req, res) => {
   renderCatByAliasPage(req, res);
 });
 

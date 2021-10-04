@@ -4,7 +4,7 @@ const renderIndexPage = async (req, res, next) => {
   try {
     const shortCatInfo = await getShortCatInfo();
     res.render('index', {
-      title: 'Главная',
+      title: 'Приют ВДомКота',
       cats: shortCatInfo,
     });
   } catch (e) {
@@ -12,10 +12,10 @@ const renderIndexPage = async (req, res, next) => {
   }
 };
 
-const renderFindPage = async (req, res, next) => {
+const renderCatsPage = async (req, res, next) => {
   try {
     const shortCatInfo = await getShortCatInfo();
-    res.render('find', {
+    res.render('cats', {
       title: 'Ищем хозяев',
       cats: shortCatInfo,
     });
@@ -28,9 +28,8 @@ const renderCatByAliasPage = async (req, res, next) => {
   try {
     const { alias } = req.params;
     const cat = await getCatByAlias(alias);
-    console.log(cat);
     res.render('cat-id', {
-      title: 'Ищем хозяев',
+      title: alias,
       cat,
     });
   } catch (e) {
@@ -40,6 +39,6 @@ const renderCatByAliasPage = async (req, res, next) => {
 
 module.exports = {
   renderIndexPage,
-  renderFindPage,
+  renderCatsPage,
   renderCatByAliasPage,
 };
