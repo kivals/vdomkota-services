@@ -1,29 +1,18 @@
-import { Module } from '@nestjs/common';
-import { createLogger, format, LoggerOptions, transports } from 'winston';
+import { DynamicModule, Global, Module } from '@nestjs/common';
+import { WinstonModuleOptions } from './winston.interfaces';
+import { createWinstonAsyncProviders } from './winston.providers';
 
-@Module({
-  providers: [
-    {
-      provide: 'winston-options',
-      //TODO вынести в конфиг
-      useFactory: (): LoggerOptions => {
-        return {
-          level: 'info',
-          format: format.json(),
-          transports: [
-            new transports.Console({
-              format: format.simple(),
-            }),
-          ],
-        };
-      },
-    },
-    {
-      provide: 'winston',
-      useFactory: (loggerOpts: LoggerOptions) => createLogger(loggerOpts),
-      inject: ['winston-options'],
-    },
-  ],
-  exports: ['winston-options', 'winston'],
-})
-export class WinstonModule {}
+@Global()
+@Module({})
+export class WinstonModule {
+  public static forRootAsync(options: WinstonModuleOptions): DynamicModule {
+    const providers = createWinstonAsyncProviders(options);
+
+    return {
+      module: WinstonModule,
+      providers,
+      imports: options.imports,
+      exports: providers,
+    };
+  }
+}

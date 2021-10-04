@@ -7,6 +7,7 @@ export const envValidatorSchema = (): ConfigModuleOptions => {
       MONGODB_HOST: Joi.string().required().default('api-db'),
       MONGODB_PORT: Joi.number().positive().default(27017),
       MONGODB_DATABASE: Joi.string().required().default('vdomkota'),
+      APP_ENV: Joi.string().valid('dev', 'prod').default('dev'),
     }),
     isGlobal: true,
   };

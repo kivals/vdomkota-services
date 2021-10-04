@@ -1,24 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { CatModel } from './cat.model';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { CreateCatDto } from './dto/create-cat.dto';
+import {WINSTON_MODULE_PROVIDER} from "../winston/winston.constants";
+import {Logger} from "winston";
 
 @Injectable()
 export class CatService {
   constructor(
     @InjectModel(CatModel) private readonly catModel: ModelType<CatModel>,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
   async findAll() {
+    this.logger.info('Get all cats');
     return this.catModel.find({}).exec();
   }
 
   async create(dto: CreateCatDto) {
+    this.logger.info(`Create cat: ${dto.alias}`);
     return this.catModel.create(dto);
   }
 
   async getShortCatsInfo() {
+    this.logger.info('Get short cat info');
     return this.catModel
       .aggregate()
       .sort({ _id: 1 })
@@ -39,6 +45,7 @@ export class CatService {
   }
 
   async getCatByAlias(alias: string) {
+    this.logger.info(`Get cat by alias: ${alias}`);
     return this.catModel
       .aggregate()
       .match({ alias })
