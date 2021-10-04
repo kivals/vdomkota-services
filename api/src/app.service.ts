@@ -13,7 +13,7 @@ export class AppService {
     const appENV = this.config.get('APP_ENV');
     this.logger.info('Logging the appENV -> ' + appENV);
     return {
-      message: 'Helloedу',
+      message: 'Hello',
     };
   }
 }

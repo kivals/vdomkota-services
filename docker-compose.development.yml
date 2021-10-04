@@ -15,6 +15,10 @@ services:
     volumes:
     - ./html-api:/usr/src/app
 
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/nginx.conf
+
   mongo-express:
     image: mongo-express
     restart: unless-stopped
