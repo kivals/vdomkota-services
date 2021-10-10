@@ -7,7 +7,7 @@ services:
     command: npm run start:prod
     restart: unless-stopped
     environment:
-      - PORT=3000
+      - APP_PORT=3000
       - MONGODB_HOST=api-db
       - MONGODB_PORT=27017
       - MONGODB_DATABASE=vdomkota
