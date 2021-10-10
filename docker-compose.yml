@@ -8,7 +8,9 @@ services:
     restart: unless-stopped
     environment:
       - PORT=3000
-      - MONGO_URL=mongodb://api_db:27017/api
+      - MONGODB_HOST=api-db
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=vdomkota
       - APP_ENV=prod
     depends_on:
       - api-db

@@ -7,8 +7,8 @@ const {
   renderCatByAliasPage,
 } = require('../controllers');
 
-router.get('/', async (req, res) => {
-  renderIndexPage(req, res);
+router.get('/', async (req, res, next) => {
+  renderIndexPage(req, res, next);
 });
 
 router.get('/cats', async (req, res) => {
