@@ -9,6 +9,8 @@ export class CreateCatDto {
 
   hasHome?: boolean;
 
+  photoLimit?: number;
+
   shelterPutDate: Date;
 
   characteristics?: CatCharacteristic[];
