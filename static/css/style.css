@@ -1646,6 +1646,7 @@ body.ie ._ibg img {
 
 .slider-cats__slide {
   padding-bottom: 60%;
+  background: #b3b3b3;
 }
 
 .slider-cats__dots {
@@ -1766,6 +1767,22 @@ body.ie ._ibg img {
   color: #000;
   background-color: #FFF;
   border: 2px solid #f38bae;
+}
+
+._slide-ibg {
+  position: relative;
+}
+
+._slide-ibg img {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 .page {
