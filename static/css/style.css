@@ -692,6 +692,20 @@ ol.counter li:before {
   object-fit: cover;
 }
 
+._slide-ibg {
+  position: relative;
+}
+
+._slide-ibg img {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 body.ie ._ibg {
   background-position: center;
   background-size: cover;
@@ -1349,8 +1363,25 @@ body.ie ._ibg img {
   padding-bottom: 25%;
 }
 
+.donation__image img {
+  border-radius: 10%;
+}
+
 .donation__content {
   padding: 0 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 
 .donation__bank-info {
@@ -1649,6 +1680,7 @@ body.ie ._ibg img {
 
 .slider-cats__slide {
   padding-bottom: 60%;
+  background: #b3b3b3;
 }
 
 .slider-cats__dots {
@@ -2141,13 +2173,6 @@ body.ie ._ibg img {
   }
 
   .donation__content {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
