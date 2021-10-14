@@ -14,7 +14,10 @@
                             <article class="find__cat cat-item">
                                 <div class="cat-item__body">
                                     <div class="cat-item__image _ibg">
-                                        <img src="<%= cat.photoPath %>" alt="Котик <%= cat.name %>">
+                                        <picture>
+                                            <source srcset="<%= cat.photoPath %>.webp" type="image/webp">
+                                            <img src="<%= cat.photoPath %>.jpg" alt="Котик <%= cat.name %>">
+                                        </picture>
                                     </div>
                                     <div class="cat-item__name"><%= cat.name %></div>
                                     <div class="cat-item__overlay">

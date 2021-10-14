@@ -10,7 +10,10 @@
                 <div class="slider-cats__body _swiper">
                     <% for(var photo of cat.photos) { %>
                         <div class="slider-cats__slide _slide-ibg">
-                            <img src="<%= photo.path %>" alt="<%= cat.alias %>">
+                            <picture>
+                                <source srcset="<%= photo.path %>.webp" type="image/webp">
+                                <img src="<%= photo.path %>.jpg" alt="Котик <%= cat.alias %>">
+                            </picture>
                         </div>
                     <% }%>
                 </div>

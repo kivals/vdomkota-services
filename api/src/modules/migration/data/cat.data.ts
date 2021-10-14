@@ -243,7 +243,7 @@ export const generateCats = (): CreateCatDto[] => {
 export const generatePhotos = (catId: string, alias: string, limit = 10) => {
   return [...Array(limit)].map((value, index) => ({
     catId: catId,
-    path: `/cats/${alias}/${alias.toLowerCase()}-${index + 1}.webp`,
+    path: `/cats/${alias}/${alias.toLowerCase()}-${index + 1}`,
     isDeleted: false,
   }));
 };
