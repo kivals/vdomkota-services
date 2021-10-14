@@ -1,5 +1,6 @@
 import { CreateCatDto } from '../../cat/dto/create-cat.dto';
 
+// ВАЖЕН! порядок следования котов
 export const generateCats = (): CreateCatDto[] => {
   return [
     {
