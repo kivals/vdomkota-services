@@ -18,7 +18,7 @@ server {
         root /usr/share/nginx/static/css/;
     }
 
-    location ~ \.(webp|png|ico|svg)$ {
+    location ~ \.(jpeg|jpg|webp|png|ico|svg)$ {
         root /usr/share/nginx/static/images/;
     }
 
