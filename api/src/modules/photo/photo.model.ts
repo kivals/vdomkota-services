@@ -10,4 +10,10 @@ export class PhotoModel {
 
   @prop()
   catId: Types.ObjectId;
+
+  @prop()
+  order: number;
+
+  @prop()
+  isMain: boolean;
 }
