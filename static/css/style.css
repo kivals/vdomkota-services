@@ -1412,10 +1412,18 @@ body.ie ._ibg img {
 }
 
 .donation__additional {
-  font-size: 12px;
-  line-height: 140%;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  line-height: 150%;
   font-style: italic;
   color: #b2b2b2;
+}
+
+.donation__additional span {
+  color: #292929;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
 }
 
 .help {
