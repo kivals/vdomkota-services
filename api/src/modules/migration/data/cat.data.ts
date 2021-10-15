@@ -1,6 +1,7 @@
 import { CreateCatDto } from '../../cat/dto/create-cat.dto';
 import { PhotoDto } from "../../photo/dto/photo.dto";
 import { Types } from "mongoose";
+import {Sex} from "../../cat/cat.model";
 
 // ВАЖЕН! порядок следования котов
 export const generateCats = (): CreateCatDto[] => {
@@ -16,6 +17,8 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Феликс',
       order: 1,
+      sex: Sex.male,
+      isKitten: false,
       shelterPutDate: new Date(),
       age: 36,
       photoLimit: 6,
@@ -39,6 +42,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Пандора',
       order: 2,
+      sex: Sex.female,
       shelterPutDate: new Date(),
       age: 24,
       hasHome: false,
@@ -66,6 +70,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Фокс',
       order: 3,
+      sex: Sex.male,
       photoLimit: 8,
       shelterPutDate: new Date(),
       age: 24,
@@ -91,6 +96,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Дашка',
       order: 4,
+      sex: Sex.female,
       photoLimit: 10,
       shelterPutDate: new Date(),
       age: 12,
@@ -115,6 +121,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Лео',
       order: 5,
+      sex: Sex.male,
       photoLimit: 6,
       shelterPutDate: new Date(),
       age: 24,
@@ -138,6 +145,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Лапка',
       order: 6,
+      sex: Sex.female,
       photoLimit: 7,
       shelterPutDate: new Date(),
       age: 24,
@@ -162,6 +170,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Атом',
       order: 7,
+      sex: Sex.male,
       photoLimit: 10,
       shelterPutDate: new Date(),
       age: 12,
@@ -187,6 +196,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Дик',
       order: 8,
+      sex: Sex.male,
       photoLimit: 6,
       shelterPutDate: new Date(),
       age: 36,
@@ -216,6 +226,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Пират',
       order: 9,
+      sex: Sex.male,
       photoLimit: 9,
       shelterPutDate: new Date(),
       age: 24,
@@ -247,6 +258,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Рыся',
       order: 10,
+      sex: Sex.female,
       photoLimit: 6,
       shelterPutDate: new Date(),
       age: 12,
@@ -281,6 +293,7 @@ export const generateCats = (): CreateCatDto[] => {
       `,
       name: 'Тишка',
       order: 11,
+      sex: Sex.male,
       photoLimit: 6,
       shelterPutDate: new Date(),
       age: 24,

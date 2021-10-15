@@ -1,9 +1,13 @@
+import { Sex } from '../cat.model';
+
 export class CreateCatDto {
   name: string;
 
   alias: string;
 
   age?: number;
+
+  sex: Sex;
 
   order: number;
 
@@ -12,6 +16,8 @@ export class CreateCatDto {
   hasHome?: boolean;
 
   photoLimit?: number;
+
+  isKitten?: boolean;
 
   shelterPutDate: Date;
 

@@ -43,6 +43,8 @@ export class CatService {
         _id: 0,
         name: 1,
         alias: 1,
+        sex: 1,
+        isKitten: 1,
         photos: 1,
       });
   }

@@ -1,6 +1,11 @@
 import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import { prop } from '@typegoose/typegoose';
 
+export enum Sex {
+  male = 'male',
+  female = 'female',
+}
+
 class CatCharacteristic {
   @prop()
   alias: string;
@@ -23,6 +28,9 @@ export class CatModel extends TimeStamps {
   @prop()
   age: number;
 
+  @prop({ default: false } )
+  isKitten: boolean;
+
   @prop()
   info: string;
 
@@ -31,6 +39,9 @@ export class CatModel extends TimeStamps {
 
   @prop()
   order: number;
+
+  @prop({ enum: Sex })
+  sex: Sex;
 
   @prop({ type: () => Date })
   shelterPutDate: Date;
