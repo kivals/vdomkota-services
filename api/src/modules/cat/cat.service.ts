@@ -1,10 +1,10 @@
-import {Inject, Injectable} from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { CatModel } from './cat.model';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { CreateCatDto } from './dto/create-cat.dto';
-import {WINSTON_MODULE_PROVIDER} from "../winston/winston.constants";
-import {Logger} from "winston";
+import { WINSTON_MODULE_PROVIDER } from '../winston/winston.constants';
+import { Logger } from 'winston';
 
 @Injectable()
 export class CatService {
@@ -27,12 +27,15 @@ export class CatService {
     this.logger.info('Get short cat info');
     return this.catModel
       .aggregate()
-      .sort({ _id: 1 })
+      .sort({ order: 1 })
       .limit(30)
       .lookup({
         from: 'Photo',
         localField: '_id',
-        pipeline: [{ $sample: { size: 1 } }, { $project: { _id: 0, path: 1 } }],
+        pipeline: [
+          { $match: { isMain: true } },
+          { $project: { _id: 0, path: 1 } },
+        ],
         foreignField: 'catId',
         as: 'photos',
       })

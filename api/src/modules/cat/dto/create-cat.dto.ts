@@ -5,6 +5,8 @@ export class CreateCatDto {
 
   age?: number;
 
+  order: number;
+
   info: string;
 
   hasHome?: boolean;

@@ -26,8 +26,11 @@ export class CatModel extends TimeStamps {
   @prop()
   info: string;
 
+  @prop({ default: false })
+  hasHome?: boolean;
+
   @prop()
-  hasHome: boolean;
+  order: number;
 
   @prop({ type: () => Date })
   shelterPutDate: Date;
