@@ -1,10 +1,22 @@
 version: '3'
 
 services:
+  frontend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    command: npm run serve
+    ports:
+      - 3000:8080
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+
   api:
     command: npm run start:dev
     ports:
-      - 3000:3000
+      - 3001:3001
     environment:
       - APP_ENV=dev
     volumes:
@@ -12,6 +24,8 @@ services:
 
   html-api:
     command: npm run dev
+    ports:
+      - 3002:3002
     volumes:
     - ./html-api:/usr/src/app
 

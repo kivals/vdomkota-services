@@ -3,11 +3,15 @@ server {
     server_name     vdomkota.ru www.vdomkota.ru;
 
     location / {
-        proxy_pass  http://html-api:4000/;
+        proxy_pass  http://html-api:3002/;
     }
 
     location /api/ {
-        proxy_pass http://api:3000/;
+        proxy_pass http://api:3001/;
+    }
+
+    location /cms/ {
+        proxy_pass http://frontend:3000/;
     }
 
     location /fonts/ {
