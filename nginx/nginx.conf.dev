@@ -11,28 +11,14 @@ server {
     }
 
     location /cms/ {
-        proxy_pass http://frontend:8080/;
+        proxy_pass http://frontend:3000/cms/;
         # Needed for sockets
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
     }
 
-    location /fonts/ {
-        root /usr/share/nginx/static/;
-    }
 
-    location ~ \.(css)$ {
-        root /usr/share/nginx/static/css/;
-    }
-
-    location ~ \.(jpeg|jpg|webp|png|ico|svg)$ {
-        root /usr/share/nginx/static/images/;
-    }
-
-    location ~ \.(js)$ {
-        root /usr/share/nginx/static/js/;
-    }
 
     location ~ \.(mp4|webm)$ {
         root /usr/share/nginx/static/videos/;

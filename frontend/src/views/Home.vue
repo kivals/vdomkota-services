@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App2" />
+    <HelloWorld msg="Welcome to Your Vue.js App123sdfsdfff6666впаывапвыапывапывапffffffffff123" />
   </div>
   <p @click="getDataFromApi">
     тут будет текст <br>
@@ -25,12 +25,12 @@ export default {
     };
   },
   async mounted() {
-    const data = await axios.get("/api/short-cat-info");
+    const data = await axios.get("/api/cat/short-cat-info");
     console.log(data);
   },
   methods: {
     async getDataFromApi() {
-      this.text = await axios.get("/api/short-cat-info");
+      this.text = await axios.get("/api/cat/short-cat-info");
     },
   },
 };
