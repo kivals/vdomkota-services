@@ -10,6 +10,7 @@ server {
         proxy_pass http://api:3001/;
     }
 
+    # CMS часть
     location /cms/ {
         proxy_pass http://frontend:3000/cms/;
         # Needed for sockets
@@ -18,16 +19,42 @@ server {
         proxy_set_header Connection "upgrade";
     }
 
+    # Статика для CMS части
+    location ~ ^/cms/(.*)$ {
+        proxy_pass http://frontend:3000/cms/$1;
+    }
 
+    # Шрифты для основного сайта
+    location /fonts/ {
+        root /usr/share/nginx/static/;
+    }
 
+    # CSS для основного сайта
+    location ~ \.(css)$ {
+        root /usr/share/nginx/static/css/;
+    }
+
+    # Картинки для основного сайта
+    location ~ \.(jpeg|jpg|webp|png|ico|svg)$ {
+        root /usr/share/nginx/static/images/;
+    }
+
+    # JS для основного сайта
+    location ~ \.(js)$ {
+        root /usr/share/nginx/static/js/;
+    }
+
+    # Видео для основного сайта
     location ~ \.(mp4|webm)$ {
         root /usr/share/nginx/static/videos/;
     }
 
+    # SEO для основного сайта
     location /sitemap.xml {
         root /usr/share/nginx/static/seo/;
     }
 
+    # SEO для основного сайта
     location /robots.txt {
         root /usr/share/nginx/static/seo/;
     }
