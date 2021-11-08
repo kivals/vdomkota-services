@@ -7,7 +7,7 @@ services:
       context: ./frontend
     container_name: vdomkota-docker-frontend
     restart: unless-stopped
-    command: serve -s build -l 3000
+    command: serve -s dist -l 3000
     networks:
       - vdomkota-service-network
 
