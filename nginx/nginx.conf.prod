@@ -21,7 +21,7 @@ server {
 
     # Статика для CMS части
     location ~ ^/cms/(.*)$ {
-        proxy_pass http://frontend:3000/cms/$1;
+        proxy_pass http://frontend:3000/$1;
     }
 
     # Шрифты для основного сайта
