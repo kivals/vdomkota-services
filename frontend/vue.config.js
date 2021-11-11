@@ -1,5 +1,12 @@
 module.exports = {
   publicPath: "/cms/",
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "@/assets/scss/style.scss";`,
+      },
+    },
+  },
   devServer: {
     disableHostCheck: true,
     port: 3000,
