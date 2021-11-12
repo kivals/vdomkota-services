@@ -8,17 +8,17 @@
         alt=""
       />
     </div>
-    <div class="side-nav__deliver"></div>
-    <app-nav-bar />
+    <div class="deliver"></div>
+    <app-navbar />
   </aside>
 </template>
 
 <script>
-import AppNavBar from "@/components/TheNavBar";
+import AppNavbar from "@/components/AppNavbar";
 
 export default {
-  name: "AppSidebar",
-  components: { AppNavBar },
+  name: "TheSidebar",
+  components: { AppNavbar },
 };
 </script>
 

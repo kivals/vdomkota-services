@@ -1,26 +1,54 @@
 <template>
   <div class="container">
-    <app-sidebar></app-sidebar>
-
+    <app-burger v-if="isMobileView" v-model="showMobileSidebar" />
+    <app-sidebar v-if="isDesktopView" />
+    <app-mobile-sidebar
+      v-if="isMobileView"
+      :isActive="showMobileSidebar"
+      @closeMenu="closeSidebar"
+    />
     <div class="content">
       <router-view />
+      <footer class="footer">
+        Разработан <a href="mailto:kivals.90@yandex.ru">kivals.90@yandex.ru</a>
+      </footer>
     </div>
   </div>
 </template>
 
 <script>
-import AppSidebar from "@/components/TheSidebar";
+import AppSidebar from "@/components/AppSidebar";
+import AppBurger from "@/components/AppBurger";
+import AppMobileSidebar from "@/components/AppMobileSidebar";
 
 export default {
   name: "MainLayout",
-  components: { AppSidebar },
+  components: { AppSidebar, AppMobileSidebar, AppBurger },
+  data() {
+    return {
+      showMobileSidebar: false,
+    };
+  },
+  computed: {
+    isMobileView() {
+      return this.$store.state.isMobileView;
+    },
+    isDesktopView() {
+      return !this.isMobileView;
+    },
+  },
+  methods: {
+    closeSidebar() {
+      this.showMobileSidebar = false;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .container {
+  height: 100vh;
   display: flex;
-  overflow: hidden;
   background-color: rgb(22, 35, 67);
   position: relative;
   z-index: 0;
@@ -83,44 +111,52 @@ export default {
     }
   }
 }
+
 .content {
-  border-radius: 35px/50px 0 0 0;
+  width: 100%;
+  overflow-y: auto;
+  flex-direction: column;
+  display: flex;
   background-color: rgb(240, 245, 255);
-  flex: 1 1 0%;
-  margin-left: 1rem;
+  flex: 1 1 0;
   min-width: 0;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 2.5rem;
   position: relative;
-  &:before {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 40px 0 0 0;
-    background-color: rgb(191, 203, 228);
-    margin-top: 2rem;
-    margin-left: -1rem;
+  @media (min-width: 768px) {
+    border-radius: 35px/50px 0 0 0;
+    &:before {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 40px 0 0 0;
+      background-color: rgb(191, 203, 228);
+      margin-top: 2rem;
+      margin-left: -1rem;
+    }
   }
 
   &__data {
     margin-top: 1rem;
+    flex-grow: 1;
   }
 }
 
 .cats-content {
   &__body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
     gap: 1.25rem;
     padding-top: 1.25rem;
     margin-top: 1.25rem;
     border-top-width: 1px;
     border-color: rgb(222, 229, 245);
+    justify-content: space-evenly;
   }
 }
 
@@ -165,5 +201,54 @@ export default {
       margin: auto 0;
     }
   }
+}
+
+.sidebar-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 98;
+}
+
+.mobile-side-nav {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  flex-shrink: 0;
+  width: 16rem;
+  padding: 1rem;
+  z-index: 99;
+  background-color: rgb(22, 35, 67);
+  transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  &.show {
+    left: 0;
+  }
+
+  &__header {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      font-weight: 600;
+      font-size: 2rem;
+      color: $color-brand;
+      padding: 0.75rem 0;
+    }
+  }
+}
+
+.footer {
+  font-size: 12px;
+  color: #8c94a7;
+  padding: 10px 0;
+  text-align: center;
+  font-style: italic;
+  opacity: 0.7;
 }
 </style>
