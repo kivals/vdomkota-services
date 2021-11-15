@@ -37,8 +37,19 @@ const renderCatByAliasPage = async (req, res, next) => {
   }
 };
 
+const renderAboutPage = async (req, res, next) => {
+  try {
+    res.render('about', {
+      title: 'О приюте',
+    });
+  } catch (e) {
+    return next(e);
+  }
+};
+
 module.exports = {
   renderIndexPage,
   renderCatsPage,
   renderCatByAliasPage,
+  renderAboutPage,
 };

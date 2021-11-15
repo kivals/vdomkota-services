@@ -5,6 +5,7 @@ const {
   renderIndexPage,
   renderCatsPage,
   renderCatByAliasPage,
+  renderAboutPage,
 } = require('../controllers');
 
 router.get('/', async (req, res, next) => {
@@ -17,6 +18,10 @@ router.get('/cats', async (req, res) => {
 
 router.get('/cats/:alias', async (req, res) => {
   renderCatByAliasPage(req, res);
+});
+
+router.get('/about', async (req, res) => {
+  renderAboutPage(req, res);
 });
 
 module.exports = router;
