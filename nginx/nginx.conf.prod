@@ -35,7 +35,7 @@ server {
     }
 
     # Картинки для основного сайта
-    location ~ \.(jpeg|jpg|webp|png|ico|svg)$ {
+    location ~ \.(jpeg|jpg|webp|png|ico|svg|gif)$ {
         root /usr/share/nginx/static/images/;
     }
 
