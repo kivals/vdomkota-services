@@ -1,24 +1,12 @@
 <template>
-  <div class="cat-details">
+  <app-loader v-if="isLoading" />
+  <div v-else class="cat-details">
     <div class="cat-details__card cat-card">
       <div class="cat-card__header">
-        <h2>Display Information</h2>
+        <h2>Детальная информация о котике по кличке {{ cat.name }}</h2>
       </div>
       <div class="cat-card__body">
-        <div class="cat-card__avatar cat-avatar">
-          <div class="cat-avatar__border">
-            <div class="cat-avatar__photo zoom-in">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/vdomkota-6332e.appspot.com/o/main-page-config%2Fshelter%2Fcat-about.jpg?alt=media&token=e9bed123-81c6-4bda-8a3f-1aa8119b960b"
-                alt=""
-              />
-            </div>
-            <button class="cat-avatar__btn btn btn_primary">
-              Редактировать
-            </button>
-            <button class="cat-avatar__btn btn btn_danger">Удалить</button>
-          </div>
-        </div>
+        <cat-avatar :avatar-url="cat.photos[0]" class="cat-card__avatar" />
         <div class="cat-card__info">
           <form class="cat-form" action="#">
             <div class="cat-form__body">
@@ -89,9 +77,7 @@
                   </div>
                 </div>
               </div>
-              <button class="cat-avatar__btn btn btn_secondary">
-                Добавить поле
-              </button>
+              <app-button class="cat-avatar__btn" title="Добавить поле" type="secondary" />
             </div>
             <div class="cat-form__item cat-form-control">
               <label class="cat-form-control__label">История котика</label>
@@ -108,11 +94,45 @@
       </div>
     </div>
   </div>
+  <pre>
+    {{ cat }}
+  </pre>
 </template>
 
 <script>
+import catsApi from "@/api/cat";
+import AppLoader from "@/components/ui/AppLoader";
+import CatAvatar from "@/components/cat/CatAvatar";
+import AppButton from "@/components/ui/AppButton";
+
 export default {
   name: "CatDetails",
+  components: {
+    AppLoader,
+    CatAvatar,
+    AppButton,
+  },
+  data() {
+    return {
+      cat: null,
+    };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+  },
+  async created() {
+    try {
+      this.$store.commit("startLoading");
+      const catAlias = this.$route.params.alias;
+      this.cat = await catsApi.getCatByAlias(catAlias);
+      this.$store.commit("successLoading");
+    } catch (e) {
+      this.$store.commit("failLoading");
+      console.error(e);
+    }
+  },
 };
 </script>
 
@@ -152,33 +172,6 @@ export default {
   &__info {
     flex: 1 1 0;
     padding: 0 1rem;
-  }
-}
-
-.cat-avatar {
-  &__border {
-    padding: 1.25rem;
-    border-width: 2px;
-    border-style: dashed;
-    border-radius: 0.375rem;
-    border-color: rgb(237, 242, 247);
-  }
-  &__photo {
-    position: relative;
-    height: 10rem;
-    cursor: pointer;
-    img {
-      border-radius: 0.375rem;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      width: 100%;
-    }
-  }
-
-  &__btn {
-    margin-top: 1.25rem;
-    width: 100%;
   }
 }
 

@@ -12,6 +12,15 @@ const getListOfCats = () => {
   });
 };
 
+const getCatByAlias = (alias) => {
+  return axios.get(`/api/cat/${alias}`).then((response) => {
+    const cat = response.data[0];
+    cat.photos = cat.photos.map((photo) => `${photo.path}.jpg`);
+    return cat;
+  });
+};
+
 export default {
   getListOfCats,
+  getCatByAlias,
 };
