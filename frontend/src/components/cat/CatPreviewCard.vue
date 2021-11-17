@@ -1,7 +1,7 @@
 <template>
   <article>
     <router-link :to="{ name: 'cat', params: { alias } }" class="cat-item">
-      <div class="cat-item__wrapper">
+      <div class="cat-item__wrapper zoom-in">
         <div class="cat-item__photo">
           <div class="cat-item__preview">
             <img :src="photo" :alt="alias" />
@@ -46,11 +46,6 @@ export default {
 
     background-color: rgb(255, 255, 255);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    &:hover {
-      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.043137254901960784);
-      transform: scale(1.03);
-    }
   }
 
   &__photo {
