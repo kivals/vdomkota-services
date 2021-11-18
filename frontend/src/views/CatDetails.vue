@@ -6,9 +6,19 @@
         <h2>Детальная информация о котике по кличке {{ cat.name }}</h2>
       </div>
       <div class="cat-card__body">
-        <cat-avatar :avatar-url="cat.photos[0]" class="cat-card__avatar" />
+        <cat-avatar
+          :avatar-url="cat.photos[0]"
+          :isEdit="isEdit"
+          @edit="isEdit = true"
+          @cancel="cancelEditHandler"
+          class="cat-card__avatar"
+        />
         <div class="cat-card__info">
-          <cat-form :catData="cat" />
+          <cat-form
+            :catData="cat"
+            :isEdit="isEdit"
+            @addCharacteristic="addCharacteristicHandler"
+          />
         </div>
       </div>
     </div>
@@ -34,6 +44,7 @@ export default {
   data() {
     return {
       cat: null,
+      isEdit: false,
     };
   },
   computed: {
@@ -41,16 +52,28 @@ export default {
       return this.$store.state.isLoading;
     },
   },
+  methods: {
+    async cancelEditHandler() {
+      await this.loadCat();
+      this.isEdit = false;
+    },
+    async loadCat() {
+      try {
+        this.$store.commit("startLoading");
+        const catAlias = this.$route.params.alias;
+        this.cat = await catsApi.getCatByAlias(catAlias);
+        this.$store.commit("successLoading");
+      } catch (e) {
+        this.$store.commit("failLoading");
+        console.error(e);
+      }
+    },
+    addCharacteristicHandler(payload) {
+      this.cat.characteristics.push(payload);
+    },
+  },
   async created() {
-    try {
-      this.$store.commit("startLoading");
-      const catAlias = this.$route.params.alias;
-      this.cat = await catsApi.getCatByAlias(catAlias);
-      this.$store.commit("successLoading");
-    } catch (e) {
-      this.$store.commit("failLoading");
-      console.error(e);
-    }
+    await this.loadCat();
   },
 };
 </script>

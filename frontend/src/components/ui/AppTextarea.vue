@@ -4,6 +4,7 @@
     <textarea
       class="border-radius-left border-radius-right"
       v-model="text"
+      :disabled="disabled"
       :placeholder="placeholder"
       :rows="rowCount"
     />
@@ -27,6 +28,10 @@ export default {
     placeholder: {
       type: String,
       default: "Введите значение",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

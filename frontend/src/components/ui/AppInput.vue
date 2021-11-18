@@ -9,6 +9,7 @@
         {{ startTitle }}
       </div>
       <input
+        :disabled="disabled"
         :class="inputClasses"
         v-model="inputValue"
         :type="type"
@@ -59,6 +60,10 @@ export default {
       type: String,
       default: "",
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -83,6 +88,9 @@ export default {
   watch: {
     inputValue(newValue) {
       this.$emit("update:modelValue", newValue);
+    },
+    modelValue(value) {
+      this.inputValue = value;
     },
   },
 };

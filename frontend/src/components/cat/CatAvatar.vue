@@ -4,12 +4,27 @@
       <div class="cat-avatar__photo zoom-in">
         <img :src="avatarUrl" alt="Аватарка котика" />
       </div>
+      <template v-if="isEdit">
+        <app-button
+          class="cat-avatar__btn"
+          title="Отменить"
+          type="primary"
+          @click="cancelHandler"
+        />
+
+        <app-button
+          class="cat-avatar__btn"
+          title="Удалить котика"
+          type="danger"
+        />
+      </template>
       <app-button
+        v-else
         class="cat-avatar__btn"
         title="Редактировать"
         type="primary"
+        @click="editHandler"
       />
-      <app-button class="cat-avatar__btn" title="Удалить" type="danger" />
     </div>
   </div>
 </template>
@@ -22,10 +37,23 @@ export default {
   components: {
     AppButton,
   },
+  emits: ["edit", "cancel"],
   props: {
     avatarUrl: {
       type: String,
       required: true,
+    },
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    editHandler() {
+      this.$emit("edit");
+    },
+    cancelHandler() {
+      this.$emit("cancel");
     },
   },
 };

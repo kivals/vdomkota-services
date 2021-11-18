@@ -40,6 +40,10 @@
             box-shadow: 0 0 transparent, inset 0 0 0 3px rgba(59, 130, 246, 0.5),
             0 0 transparent;
         }
+        &:disabled {
+            cursor: not-allowed;
+            background-color: rgb(247,250,252);
+        }
     }
     &__body {
         display: flex;

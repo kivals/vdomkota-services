@@ -1,5 +1,9 @@
 <template>
-  <button class="cat-avatar__btn btn" :class="dynamicClasses">
+  <button
+    class="cat-avatar__btn btn"
+    :class="dynamicClasses"
+    @click.prevent="clickHandler"
+  >
     {{ title }}
   </button>
 </template>
@@ -17,6 +21,7 @@ const BUTTON_SIZES = {
 };
 export default {
   name: "AppButton",
+  emits: ["click"],
   props: {
     title: {
       type: String,
@@ -41,6 +46,11 @@ export default {
       const typeClass = `btn_${this.type}`;
       const sizeClass = this.size ? `btn_${this.size}` : "";
       return `${typeClass} ${sizeClass}`;
+    },
+  },
+  methods: {
+    clickHandler() {
+      this.$emit("click");
     },
   },
 };

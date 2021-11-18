@@ -3,6 +3,7 @@
     class="cat-form__item"
     v-for="characteristic in characteristics"
     v-model="characteristic.value"
+    :disabled="!isEdit"
     :key="characteristic.alias"
     :label="characteristic.name"
   />
@@ -20,6 +21,10 @@ export default {
     characteristics: {
       type: Array,
       required: true,
+    },
+    isEdit: {
+      type: Boolean,
+      default: false,
     },
   },
 };
