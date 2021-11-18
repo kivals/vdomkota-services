@@ -1,0 +1,89 @@
+<template>
+  <div class="cat-form-control">
+    <label v-if="label" class="cat-form-control__label">{{ label }}</label>
+    <div class="cat-form-control__body">
+      <div
+        v-if="startTitle"
+        class="cat-form-control__description border-radius-left"
+      >
+        {{ startTitle }}
+      </div>
+      <input
+        :class="inputClasses"
+        v-model="inputValue"
+        :type="type"
+        :placeholder="placeholder"
+      />
+      <div
+        v-if="endTitle"
+        class="cat-form-control__description border-radius-right"
+      >
+        {{ endTitle }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { isExistKey } from "@/helpers/validators";
+
+const INPUT_TYPES = {
+  NUMBER: "number",
+  TEXT: "text",
+};
+export default {
+  name: "AppInput",
+  emits: ["update:modelValue"],
+  props: {
+    modelValue: {},
+    label: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      default: INPUT_TYPES.TEXT,
+      validator: function (value) {
+        return isExistKey(INPUT_TYPES, value);
+      },
+    },
+    placeholder: {
+      type: String,
+      default: "Введите значение",
+    },
+    startTitle: {
+      type: String,
+      default: "",
+    },
+    endTitle: {
+      type: String,
+      default: "",
+    },
+  },
+  data() {
+    return {
+      inputValue: this.modelValue,
+    };
+  },
+  computed: {
+    inputClasses() {
+      if (!this.startTitle && !this.endTitle) {
+        return "border-radius-left border-radius-right";
+      }
+      let inputClass = "";
+      if (this.startTitle) {
+        inputClass += "border-radius-right";
+      }
+      if (this.endTitle) {
+        inputClass += "border-radius-left";
+      }
+      return inputClass;
+    },
+  },
+  watch: {
+    inputValue(newValue) {
+      this.$emit("update:modelValue", newValue);
+    },
+  },
+};
+</script>

@@ -14,4 +14,51 @@
     }
 }
 
+.cat-form-control {
+    margin-top: 0.75rem;
+    &__label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
 
+    input,
+    textarea {
+        width: 100%;
+        appearance: none;
+        border-width: 1px;
+        padding: 0.5rem 0.75rem;
+        line-height: inherit;
+        color: inherit;
+        &::placeholder {
+            color: rgba(160, 174, 192, 1);
+        }
+        &:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 transparent, inset 0 0 0 3px rgba(59, 130, 246, 0.5),
+            0 0 transparent;
+        }
+    }
+    &__body {
+        display: flex;
+    }
+    &__description {
+        border-width: 1px;
+        padding: 0.5rem 0.75rem;
+        color: rgb(113, 128, 150);
+        border-color: rgb(226, 232, 240);
+        background-color: rgb(247, 250, 252);
+    }
+}
+
+.border-radius-left {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.border-radius-right {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
