@@ -26,7 +26,7 @@
       class="cat-form__item"
       v-model="cat.info"
       placeholder="Введите описание котика"
-      row-count="10"
+      :row-count="10"
       label="История котика"
     />
   </form>
