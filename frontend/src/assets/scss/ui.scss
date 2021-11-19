@@ -15,7 +15,6 @@
 }
 
 .cat-form-control {
-    margin-top: 0.75rem;
     &__label {
         display: inline-block;
         margin-bottom: 0.5rem;
@@ -79,4 +78,10 @@
 .border-radius-right {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
+}
+.devider {
+    margin-top: .5rem;
+    border-top-width: 1px;
+    border-color: rgb(237,242,247);
+    width: 100%;
 }

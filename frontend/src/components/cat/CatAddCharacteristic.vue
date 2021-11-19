@@ -2,12 +2,14 @@
   <div class="form-add">
     <div class="form-add__body">
       <app-input
+        class="form-add__input"
         v-model="property"
         placeholder="Введите название свойства"
         startTitle="Название"
       />
 
       <app-input
+        class="form-add__input"
         v-model="value"
         placeholder="Введите значение свойства"
         startTitle="Значение"
@@ -63,6 +65,9 @@ export default {
   &__body {
     max-width: 49%;
     margin-bottom: 0.5rem;
+  }
+  &__input {
+    margin-top: 0.5rem;
   }
   button {
     width: auto;
