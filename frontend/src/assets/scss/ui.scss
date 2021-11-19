@@ -55,6 +55,20 @@
         border-color: rgb(226, 232, 240);
         background-color: rgb(247, 250, 252);
     }
+    &__delete {
+        border-width: 1px;
+        padding: 0.3rem 0.5rem;
+        color: rgb(202, 4, 4);
+        border-color: rgb(226, 232, 240);
+        background-color: rgb(247, 250, 252);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            width: 1rem;
+        }
+    }
 }
 
 .border-radius-left {

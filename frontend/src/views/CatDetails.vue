@@ -18,6 +18,7 @@
             :catData="cat"
             :isEdit="isEdit"
             @addCharacteristic="addCharacteristicHandler"
+            @deleteCharacteristic="deleteCharacteristicHandler"
           />
         </div>
       </div>
@@ -70,6 +71,11 @@ export default {
     },
     addCharacteristicHandler(payload) {
       this.cat.characteristics.push(payload);
+    },
+    deleteCharacteristicHandler(payload) {
+      this.cat.characteristics = this.cat.characteristics.filter(
+        (ch) => ch.alias !== payload
+      );
     },
   },
   async created() {

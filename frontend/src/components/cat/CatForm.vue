@@ -22,6 +22,7 @@
       <cat-characteristics
         :isEdit="isEdit"
         :characteristics="cat.characteristics"
+        @deleteCharacteristic="deleteCharacteristicHandler"
       />
     </div>
 
@@ -56,7 +57,7 @@ export default {
     CatCharacteristics,
     CatAddCharacteristic,
   },
-  emit: ["addCharacteristic"],
+  emit: ["addCharacteristic", "deleteCharacteristic"],
   props: {
     catData: {
       type: Object,
@@ -75,6 +76,9 @@ export default {
   methods: {
     addCharacteristicHandler(payload) {
       this.$emit("addCharacteristic", payload);
+    },
+    deleteCharacteristicHandler(payload) {
+      this.$emit("deleteCharacteristic", payload);
     },
   },
 };

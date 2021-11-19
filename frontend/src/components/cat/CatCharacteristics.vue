@@ -6,6 +6,8 @@
     :disabled="!isEdit"
     :key="characteristic.alias"
     :label="characteristic.name"
+    :deleteButton="isEdit"
+    @deleteClick="deleteInputHandler(characteristic.alias)"
   />
 </template>
 
@@ -14,6 +16,7 @@ import AppInput from "@/components/ui/AppInput";
 
 export default {
   name: "CatCharacteristics",
+  emits: ["deleteCharacteristic"],
   components: {
     AppInput,
   },
@@ -25,6 +28,11 @@ export default {
     isEdit: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    deleteInputHandler(alias) {
+      this.$emit("deleteCharacteristic", alias);
     },
   },
 };
