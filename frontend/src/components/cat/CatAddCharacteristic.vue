@@ -1,6 +1,6 @@
 <template>
   <div class="form-add">
-    <div class="form-add__body">
+    <div v-if="isShow" class="form-add__body">
       <app-input
         class="form-add__input"
         v-model="property"
@@ -17,9 +17,9 @@
     </div>
     <app-button
       class="cat-avatar__btn"
-      title="Добавить поле"
+      :title="isShow ? 'Сохранить' : 'Добавить поле'"
       type="secondary"
-      @click="addCharacteristicHandler"
+      @click="addClickHandler"
     />
   </div>
 </template>
@@ -40,9 +40,13 @@ export default {
     return {
       property: "",
       value: "",
+      isShow: false,
     };
   },
   methods: {
+    addClickHandler() {
+      this.isShow ? this.addCharacteristicHandler() : (this.isShow = true);
+    },
     addCharacteristicHandler() {
       //TODO валидация
       if (this.property && this.value) {
@@ -51,10 +55,13 @@ export default {
           name: this.property,
           value: this.value,
         });
-
-        this.property = "";
-        this.value = "";
       }
+      this.resetState();
+    },
+    resetState() {
+      this.property = "";
+      this.value = "";
+      this.isShow = false;
     },
   },
 };
