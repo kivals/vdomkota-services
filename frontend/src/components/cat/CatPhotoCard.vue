@@ -2,13 +2,10 @@
   <div class="cat-photo-card zoom-in">
     <div class="cat-photo-card__content">
       <div class="cat-photo-card__photo">
-        <img
-          src="http://tinker-vue.left4code.com/img/preview-9.a4a1f893.jpg"
-          alt=""
-        />
+        <img :src="url" alt="" />
       </div>
 
-      <app-dropdown>
+      <app-dropdown v-if="isEdit">
         <template v-slot:toggler>
           <a class="cat-photo-dropdown__toggler">
             <svg
@@ -96,6 +93,16 @@ import AppDropdownItem from "@/components/ui/dropdown/AppDropdownItem";
 export default {
   name: "CatPhotoCard",
   components: { AppDropdown, AppDropdownContent, AppDropdownItem },
+  props: {
+    url: {
+      type: String,
+      required: true,
+    },
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 

@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <cat-photos-list />
+    <cat-photos-list :photos="cat.photos" :isEdit="isEdit" />
   </div>
   <pre>
     {{ cat }}

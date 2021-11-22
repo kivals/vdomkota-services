@@ -1,12 +1,12 @@
 <template>
   <div class="cat-photo-list">
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
-    <cat-photo-card class="cat-photo-list__photo" />
+    <cat-photo-card
+      v-for="photo in photos"
+      :key="photo"
+      :url="photo"
+      :isEdit="isEdit"
+      class="cat-photo-list__photo"
+    />
   </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
   name: "CatPhotosList",
   components: {
     CatPhotoCard,
+  },
+  props: {
+    photos: {
+      type: Array,
+      required: true,
+    },
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
