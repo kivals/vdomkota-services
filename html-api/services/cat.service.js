@@ -16,6 +16,7 @@ const getSexCatName = (cat) => {
 
 const getShortCatInfo = async () => {
   const response = await axios.get(`${apiUrl}cat/short-cat-info`);
+  console.log(response.data);
   // Преобразуем формат полученных данных для html
   return response.data.map((cat) => ({
     ...cat,
