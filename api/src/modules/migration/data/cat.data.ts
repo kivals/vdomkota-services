@@ -1,7 +1,7 @@
 import { CreateCatDto } from '../../cat/dto/create-cat.dto';
-import { PhotoDto } from "../../photo/dto/photo.dto";
-import { Types } from "mongoose";
-import {Sex} from "../../cat/cat.model";
+import { PhotoDto } from '../../photo/dto/photo.dto';
+import { Types } from 'mongoose';
+import { Sex } from '../../cat/cat.model';
 
 // ВАЖЕН! порядок следования котов
 export const generateCats = (): CreateCatDto[] => {
@@ -311,11 +311,7 @@ export const generateCats = (): CreateCatDto[] => {
   ];
 };
 
-export const generatePhotos = (
-  catId: string,
-  alias: string,
-  limit = 10,
-): PhotoDto[] => {
+export const generatePhotos = (catId: string, alias: string, limit = 10): PhotoDto[] => {
   return [...Array(limit)].map((value, index) => ({
     catId: new Types.ObjectId(catId),
     path: `/cats/${alias}/${alias.toLowerCase()}-${index + 1}`,

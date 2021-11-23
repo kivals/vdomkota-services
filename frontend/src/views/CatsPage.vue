@@ -46,7 +46,7 @@ export default {
   },
   async mounted() {
     try {
-      this.cats = await catsApi.getListOfCats();
+      this.cats = await catsApi.getBaseCatInfo();
       this.isLoading = false;
     } catch (e) {
       console.error(e);

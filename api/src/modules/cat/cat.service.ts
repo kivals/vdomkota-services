@@ -32,10 +32,7 @@ export class CatService {
       .lookup({
         from: 'Photo',
         localField: '_id',
-        pipeline: [
-          { $match: { isMain: true } },
-          { $project: { _id: 0, path: 1 } },
-        ],
+        pipeline: [{ $match: { isMain: true } }, { $project: { _id: 0, path: 1 } }],
         foreignField: 'catId',
         as: 'photos',
       })
@@ -58,7 +55,7 @@ export class CatService {
       .lookup({
         from: 'Photo',
         localField: '_id',
-        pipeline: [{ $limit: 20 }, { $project: { _id: 0, path: 1 } }],
+        pipeline: [{ $limit: 20 }, { $project: { _id: 0, path: 1, isMain: 1 } }],
         foreignField: 'catId',
         as: 'photos',
       })

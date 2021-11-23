@@ -36,7 +36,7 @@
         </template>
         <app-dropdown-content>
           <app-dropdown-item>
-            <a href="" class="cat-photo-dropdown__item"
+            <a @click.prevent="onMainHandler" class="cat-photo-dropdown__item"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24px"
@@ -93,6 +93,7 @@ import AppDropdownItem from "@/components/ui/dropdown/AppDropdownItem";
 export default {
   name: "CatPhotoCard",
   components: { AppDropdown, AppDropdownContent, AppDropdownItem },
+  emits: ["changeMainPhoto"],
   props: {
     url: {
       type: String,
@@ -101,6 +102,11 @@ export default {
     isEdit: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    onMainHandler() {
+      this.$emit("changeMainPhoto");
     },
   },
 };

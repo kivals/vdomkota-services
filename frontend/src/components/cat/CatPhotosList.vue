@@ -2,9 +2,10 @@
   <div class="cat-photo-list">
     <cat-photo-card
       v-for="photo in photos"
-      :key="photo"
-      :url="photo"
+      :key="photo.path"
+      :url="photo.path"
       :isEdit="isEdit"
+      @changeMainPhoto="changeMainPhoto(photo)"
       class="cat-photo-list__photo"
     />
   </div>
@@ -18,6 +19,7 @@ export default {
   components: {
     CatPhotoCard,
   },
+  emits: ["changeMainPhoto"],
   props: {
     photos: {
       type: Array,
@@ -28,6 +30,11 @@ export default {
       default: false,
     },
   },
+  methods: {
+    changeMainPhoto(payload) {
+      this.$emit("changeMainPhoto", payload);
+    }
+  }
 };
 </script>
 

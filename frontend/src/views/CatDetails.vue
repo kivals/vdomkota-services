@@ -8,7 +8,7 @@
       </div>
       <div class="cat-card__body">
         <cat-avatar
-          :avatar-url="cat.photos[0]"
+          :avatar-url="avatarUrl"
           :isEdit="isEdit"
           @edit="isEdit = true"
           @cancel="cancelEditHandler"
@@ -24,7 +24,11 @@
         </div>
       </div>
     </div>
-    <cat-photos-list :photos="cat.photos" :isEdit="isEdit" />
+    <cat-photos-list
+      :photos="cat.photos"
+      :isEdit="isEdit"
+      @changeMainPhoto="changeMainPhoto"
+    />
   </div>
   <pre>
     {{ cat }}
@@ -56,6 +60,9 @@ export default {
     isLoading() {
       return this.$store.state.isLoading;
     },
+    avatarUrl() {
+      return this.cat.photos.find((p) => p.isMain)?.path;
+    },
   },
   methods: {
     async cancelEditHandler() {
@@ -80,6 +87,11 @@ export default {
       this.cat.characteristics = this.cat.characteristics.filter(
         (ch) => ch.alias !== payload
       );
+    },
+    changeMainPhoto(photo) {
+      const currentMainPhoto = this.cat.photos.find((ph) => ph.isMain);
+      currentMainPhoto.isMain = false;
+      photo.isMain = true;
     },
   },
   async created() {
