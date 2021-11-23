@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import AppButton from "@/components/ui/AppButton";
-import AppInput from "@/components/ui/AppInput";
+import AppButton from "@/components/ui/BaseButton";
+import AppInput from "@/components/ui/BaseInput";
 import { translit } from "@/helpers/utils";
 
 export default {

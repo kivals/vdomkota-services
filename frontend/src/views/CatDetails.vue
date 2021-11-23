@@ -38,7 +38,7 @@
 
 <script>
 import catsApi from "@/api/cat";
-import AppLoader from "@/components/ui/AppLoader";
+import AppLoader from "@/components/ui/BaseLoader";
 import CatAvatar from "@/components/cat/CatAvatar";
 import CatForm from "@/components/cat/CatForm";
 import CatPhotosList from "@/components/cat/CatPhotosList";

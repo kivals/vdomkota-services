@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import AppButton from "@/components/ui/AppButton";
+import AppButton from "@/components/ui/BaseButton";
 
 export default {
   name: "CatAvatar",

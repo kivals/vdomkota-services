@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import AppInput from "@/components/ui/AppInput";
+import AppInput from "@/components/ui/BaseInput";
 import CatCharacteristics from "@/components/cat/CatCharacteristics";
 import CatAddCharacteristic from "@/components/cat/CatAddCharacteristic";
-import AppTextarea from "@/components/ui/AppTextarea";
+import AppTextarea from "@/components/ui/BaseTextarea";
 
 export default {
   name: "CatForm",

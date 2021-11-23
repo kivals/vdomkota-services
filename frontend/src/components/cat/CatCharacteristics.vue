@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AppInput from "@/components/ui/AppInput";
+import AppInput from "@/components/ui/BaseInput";
 
 export default {
   name: "CatCharacteristics",

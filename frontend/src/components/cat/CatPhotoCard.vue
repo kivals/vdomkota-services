@@ -86,9 +86,9 @@
 </template>
 
 <script>
-import AppDropdown from "@/components/ui/dropdown/AppDropdown";
-import AppDropdownContent from "@/components/ui/dropdown/AppDropdownContent";
-import AppDropdownItem from "@/components/ui/dropdown/AppDropdownItem";
+import AppDropdown from "@/components/ui/dropdown/BaseDropdown";
+import AppDropdownContent from "@/components/ui/dropdown/BaseDropdownContent";
+import AppDropdownItem from "@/components/ui/dropdown/BaseDropdownItem";
 
 export default {
   name: "CatPhotoCard",
