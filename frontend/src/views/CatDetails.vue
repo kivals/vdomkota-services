@@ -25,9 +25,10 @@
       </div>
     </div>
     <cat-photos-list
-      :photos="cat.photos"
+      :photos="photos"
       :isEdit="isEdit"
       @changeMainPhoto="changeMainPhoto"
+      @deletePhoto="deletePhoto"
     />
   </div>
   <pre>
@@ -63,6 +64,9 @@ export default {
     avatarUrl() {
       return this.cat.photos.find((p) => p.isMain)?.path;
     },
+    photos() {
+      return this.cat.photos.filter((ph) => !ph.isDeleted);
+    },
   },
   methods: {
     async cancelEditHandler() {
@@ -92,6 +96,13 @@ export default {
       const currentMainPhoto = this.cat.photos.find((ph) => ph.isMain);
       currentMainPhoto.isMain = false;
       photo.isMain = true;
+    },
+    deletePhoto(photo) {
+      photo.isDeleted = true;
+      if (photo.isMain) {
+        photo.isMain = false;
+        this.photos[0].isMain = true;
+      }
     },
   },
   async created() {

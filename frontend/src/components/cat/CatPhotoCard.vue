@@ -57,8 +57,8 @@
               На главную
             </a>
           </app-dropdown-item>
-          <app-dropdown-item>
-            <a href="" class="cat-photo-dropdown__item"
+          <app-dropdown-item v-if="allowDelete">
+            <a @click.prevent="onDeleteHandler" class="cat-photo-dropdown__item"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24px"
@@ -93,7 +93,7 @@ import AppDropdownItem from "@/components/ui/dropdown/AppDropdownItem";
 export default {
   name: "CatPhotoCard",
   components: { AppDropdown, AppDropdownContent, AppDropdownItem },
-  emits: ["changeMainPhoto"],
+  emits: ["changeMainPhoto", "deletePhoto"],
   props: {
     url: {
       type: String,
@@ -103,10 +103,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    allowDelete: {
+      type: Boolean,
+      default: true,
+    }
   },
   methods: {
     onMainHandler() {
       this.$emit("changeMainPhoto");
+    },
+    onDeleteHandler() {
+      this.$emit("deletePhoto");
     },
   },
 };

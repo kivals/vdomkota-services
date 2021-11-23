@@ -5,7 +5,9 @@
       :key="photo.path"
       :url="photo.path"
       :isEdit="isEdit"
+      :allowDelete="allowDelete"
       @changeMainPhoto="changeMainPhoto(photo)"
+      @deletePhoto="deletePhoto(photo)"
       class="cat-photo-list__photo"
     />
   </div>
@@ -19,7 +21,7 @@ export default {
   components: {
     CatPhotoCard,
   },
-  emits: ["changeMainPhoto"],
+  emits: ["changeMainPhoto", "deletePhoto"],
   props: {
     photos: {
       type: Array,
@@ -30,11 +32,19 @@ export default {
       default: false,
     },
   },
+  computed: {
+    allowDelete() {
+      return this.photos.length > 1;
+    },
+  },
   methods: {
     changeMainPhoto(payload) {
       this.$emit("changeMainPhoto", payload);
-    }
-  }
+    },
+    deletePhoto(payload) {
+      this.$emit("deletePhoto", payload);
+    },
+  },
 };
 </script>
 
