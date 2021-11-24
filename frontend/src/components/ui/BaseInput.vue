@@ -59,7 +59,7 @@ const INPUT_TYPES = {
   TEXT: "text",
 };
 export default {
-  name: "AppInput",
+  name: "BaseInput",
   emits: ["update:modelValue", "deleteClick"],
   props: {
     modelValue: {},

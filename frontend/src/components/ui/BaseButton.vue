@@ -1,9 +1,5 @@
 <template>
-  <button
-    class="cat-avatar__btn btn"
-    :class="dynamicClasses"
-    @click.prevent="clickHandler"
-  >
+  <button class="btn" :class="dynamicClasses" @click.prevent="clickHandler">
     {{ title }}
   </button>
 </template>
@@ -20,7 +16,7 @@ const BUTTON_SIZES = {
   SMALL: "small",
 };
 export default {
-  name: "AppButton",
+  name: "BaseButton",
   emits: ["click"],
   props: {
     title: {
@@ -58,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
+  width: 100%;
   border-radius: 0.375rem;
   border-width: 1px;
   cursor: pointer;

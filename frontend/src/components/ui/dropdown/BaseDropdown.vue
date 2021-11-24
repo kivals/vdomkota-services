@@ -47,8 +47,8 @@ export default {
   flex-direction: column;
   align-items: flex-end;
   cursor: pointer;
-  position: absolute;
-  right: 3%;
-  top: 3%;
+  //position: absolute;
+  //right: 3%;
+  //top: 3%;
 }
 </style>

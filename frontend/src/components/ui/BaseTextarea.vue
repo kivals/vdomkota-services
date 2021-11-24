@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "AppTextarea",
+  name: "BaseTextarea",
   emits: ["update:modelValue"],
   props: {
     modelValue: {},

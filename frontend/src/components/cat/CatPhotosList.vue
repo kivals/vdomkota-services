@@ -6,6 +6,7 @@
       :url="photo.path"
       :isEdit="isEdit"
       :allowDelete="allowDelete"
+      :isNew="photo.isNew"
       @changeMainPhoto="changeMainPhoto(photo)"
       @deletePhoto="deletePhoto(photo)"
       class="cat-photo-list__photo"

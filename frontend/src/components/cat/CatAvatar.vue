@@ -5,20 +5,22 @@
         <img :src="avatarUrl" alt="Аватарка котика" />
       </div>
       <template v-if="isEdit">
-        <app-button
+        <base-button
           class="cat-avatar__btn"
-          title="Отменить"
-          type="primary"
+          title="Отмена"
+          type="secondary"
           @click="cancelHandler"
         />
 
-        <app-button
+        <base-button
           class="cat-avatar__btn"
           title="Удалить котика"
           type="danger"
         />
+
+        <base-uploader class="cat-avatar__btn" @uploadImage="uploadImage" />
       </template>
-      <app-button
+      <base-button
         v-else
         class="cat-avatar__btn"
         title="Редактировать"
@@ -30,14 +32,16 @@
 </template>
 
 <script>
-import AppButton from "@/components/ui/BaseButton";
+import BaseButton from "@/components/ui/BaseButton";
+import BaseUploader from "@/components/ui/BaseUploader";
 
 export default {
   name: "CatAvatar",
   components: {
-    AppButton,
+    BaseButton,
+    BaseUploader,
   },
-  emits: ["edit", "cancel"],
+  emits: ["edit", "cancel", "uploadImage"],
   props: {
     avatarUrl: {
       type: String,
@@ -54,6 +58,9 @@ export default {
     },
     cancelHandler() {
       this.$emit("cancel");
+    },
+    uploadImage(payload) {
+      this.$emit("uploadImage", payload);
     },
   },
 };

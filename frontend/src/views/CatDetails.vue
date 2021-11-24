@@ -12,6 +12,7 @@
           :isEdit="isEdit"
           @edit="isEdit = true"
           @cancel="cancelEditHandler"
+          @uploadImage="uploadImage"
           class="cat-card__avatar"
         />
         <div class="cat-card__info">
@@ -93,16 +94,28 @@ export default {
       );
     },
     changeMainPhoto(photo) {
+      if (photo.isNew) {
+        //TODO ОПОВЕЩЕНИЕ
+        console.error("Нельзя ставить на главную, еще несохраненное фото");
+        return;
+      }
       const currentMainPhoto = this.cat.photos.find((ph) => ph.isMain);
       currentMainPhoto.isMain = false;
       photo.isMain = true;
     },
     deletePhoto(photo) {
+      if (photo.isNew) {
+        this.cat.photos = this.cat.photos.filter((ph) => ph !== photo);
+        return;
+      }
       photo.isDeleted = true;
       if (photo.isMain) {
         photo.isMain = false;
         this.photos[0].isMain = true;
       }
+    },
+    uploadImage(payload) {
+      this.cat.photos.push({ path: payload, isNew: true });
     },
   },
   async created() {

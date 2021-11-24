@@ -5,7 +5,8 @@
         <img :src="url" alt="" />
       </div>
 
-      <app-dropdown v-if="isEdit">
+      <base-mark v-if="isNew" class="cat-photo-card__mark" title="Новое" />
+      <base-dropdown class="cat-photo-card__dropdown" v-if="isEdit">
         <template v-slot:toggler>
           <a class="cat-photo-dropdown__toggler">
             <svg
@@ -34,8 +35,8 @@
             </svg>
           </a>
         </template>
-        <app-dropdown-content>
-          <app-dropdown-item>
+        <base-dropdown-content>
+          <base-dropdown-item>
             <a @click.prevent="onMainHandler" class="cat-photo-dropdown__item"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +57,8 @@
               </svg>
               На главную
             </a>
-          </app-dropdown-item>
-          <app-dropdown-item v-if="allowDelete">
+          </base-dropdown-item>
+          <base-dropdown-item v-if="allowDelete">
             <a @click.prevent="onDeleteHandler" class="cat-photo-dropdown__item"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,21 +79,22 @@
               </svg>
               Удалить
             </a>
-          </app-dropdown-item>
-        </app-dropdown-content>
-      </app-dropdown>
+          </base-dropdown-item>
+        </base-dropdown-content>
+      </base-dropdown>
     </div>
   </div>
 </template>
 
 <script>
-import AppDropdown from "@/components/ui/dropdown/BaseDropdown";
-import AppDropdownContent from "@/components/ui/dropdown/BaseDropdownContent";
-import AppDropdownItem from "@/components/ui/dropdown/BaseDropdownItem";
+import BaseDropdown from "@/components/ui/dropdown/BaseDropdown";
+import BaseDropdownContent from "@/components/ui/dropdown/BaseDropdownContent";
+import BaseDropdownItem from "@/components/ui/dropdown/BaseDropdownItem";
+import BaseMark from "@/components/ui/BaseMark";
 
 export default {
   name: "CatPhotoCard",
-  components: { AppDropdown, AppDropdownContent, AppDropdownItem },
+  components: { BaseDropdown, BaseDropdownContent, BaseDropdownItem, BaseMark },
   emits: ["changeMainPhoto", "deletePhoto"],
   props: {
     url: {
@@ -106,7 +108,11 @@ export default {
     allowDelete: {
       type: Boolean,
       default: true,
-    }
+    },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     onMainHandler() {
@@ -133,7 +139,7 @@ export default {
 
   &__photo {
     position: relative;
-    height: 10rem;
+    padding-bottom: 100%;
     cursor: pointer;
     img {
       border-radius: 0.375rem;
@@ -142,6 +148,18 @@ export default {
       position: absolute;
       width: 100%;
     }
+  }
+
+  &__mark {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 3%;
+    right: 3%;
   }
 }
 </style>
