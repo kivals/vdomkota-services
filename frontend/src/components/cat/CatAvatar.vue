@@ -19,6 +19,12 @@
         />
 
         <base-uploader class="cat-avatar__btn" @uploadImage="uploadImage" />
+
+        <base-button
+            class="cat-avatar__btn"
+            title="Сохранить"
+            type="success"
+        />
       </template>
       <base-button
         v-else

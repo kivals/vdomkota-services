@@ -8,6 +8,7 @@
 import { isExistKey } from "@/helpers/validators";
 
 const BUTTON_TYPES = {
+  SUCCESS: "success",
   PRIMARY: "primary",
   DANGER: "danger",
   SECONDARY: "secondary",
@@ -82,6 +83,11 @@ export default {
     color: #fff;
     background-color: rgb(47, 90, 216);
     border-color: rgb(47, 90, 216);
+  }
+  &_success {
+    color: #fff;
+    background-color: rgb(145,199,20);
+    border-color: rgb(145,199,20);
   }
   &_secondary {
     color: rgb(113, 128, 150);

@@ -1,5 +1,5 @@
 <template>
-  <form class="cat-form" action="#">
+  <div class="cat-form">
     <div class="cat-form__content">
       <div class="cat-form__body">
         <app-input
@@ -45,7 +45,7 @@
       :row-count="10"
       label="История котика"
     />
-  </form>
+  </div>
 </template>
 
 <script>
