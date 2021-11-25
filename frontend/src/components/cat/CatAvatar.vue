@@ -4,6 +4,7 @@
       <div class="cat-avatar__photo zoom-in">
         <img :src="avatarUrl" alt="Аватарка котика" />
       </div>
+      <!--      TODO БЛОК КНОПОК ВЫНЕСТИ В ОТДЕЛЬНЫЙ КОМПОНЕНТ     -->
       <template v-if="isEdit">
         <base-button
           class="cat-avatar__btn"
@@ -21,9 +22,10 @@
         <base-uploader class="cat-avatar__btn" @uploadImage="uploadImage" />
 
         <base-button
-            class="cat-avatar__btn"
-            title="Сохранить"
-            type="success"
+          class="cat-avatar__btn"
+          title="Сохранить"
+          type="success"
+          @click="save"
         />
       </template>
       <base-button
@@ -47,7 +49,7 @@ export default {
     BaseButton,
     BaseUploader,
   },
-  emits: ["edit", "cancel", "uploadImage"],
+  emits: ["edit", "cancel", "uploadImage", "save"],
   props: {
     avatarUrl: {
       type: String,
@@ -67,6 +69,9 @@ export default {
     },
     uploadImage(payload) {
       this.$emit("uploadImage", payload);
+    },
+    save() {
+      this.$emit("save");
     },
   },
 };

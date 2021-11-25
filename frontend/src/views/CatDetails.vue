@@ -13,6 +13,7 @@
           @edit="isEdit = true"
           @cancel="cancelEditHandler"
           @uploadImage="uploadImage"
+          @save="save"
           class="cat-card__avatar"
         />
         <div class="cat-card__info">
@@ -116,6 +117,17 @@ export default {
     },
     uploadImage(payload) {
       this.cat.photos.push({ path: payload, isNew: true });
+    },
+    async save() {
+      try {
+        this.$store.commit("startLoading");
+        const catAlias = this.$route.params.alias;
+        await catsApi.updateCat(catAlias, this.cat);
+        this.$store.commit("successLoading");
+      } catch (e) {
+        this.$store.commit("failLoading");
+        console.error(e);
+      }
     },
   },
   async created() {

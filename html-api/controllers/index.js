@@ -1,8 +1,8 @@
-const { getShortCatInfo, getCatByAlias } = require('../services/cat.service');
+const { getBaseCatInfo, getCatByAlias } = require('../services/cat.service');
 
 const renderIndexPage = async (req, res, next) => {
   try {
-    const shortCatInfo = await getShortCatInfo();
+    const shortCatInfo = await getBaseCatInfo();
     res.render('index', {
       title: 'Приют ВДомКота',
       cats: shortCatInfo,
@@ -14,7 +14,7 @@ const renderIndexPage = async (req, res, next) => {
 
 const renderCatsPage = async (req, res, next) => {
   try {
-    const shortCatInfo = await getShortCatInfo();
+    const shortCatInfo = await getBaseCatInfo();
     res.render('cats', {
       title: 'Ищем хозяев',
       cats: shortCatInfo,

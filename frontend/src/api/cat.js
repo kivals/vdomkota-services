@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getBaseCatInfo = () => {
-  return axios.get(`/api/cat/short-cat-info`).then((response) => {
+  return axios.get(`/api/cats/base`).then((response) => {
     const cats = response.data;
     return cats.map((cat) => {
       return {
@@ -13,7 +13,7 @@ const getBaseCatInfo = () => {
 };
 
 const getCatByAlias = (alias) => {
-  return axios.get(`/api/cat/${alias}`).then(({ data }) => {
+  return axios.get(`/api/cats/${alias}`).then(({ data }) => {
     const cat = data[0];
     cat.photos = cat.photos.map((photo) => ({
       ...photo,
@@ -23,7 +23,14 @@ const getCatByAlias = (alias) => {
   });
 };
 
+const updateCat = (alias, savedCat) => {
+  return axios.put(`/api/cats/${alias}`, { cat: savedCat }).then((response) => {
+    console.log(response);
+  });
+};
+
 export default {
   getBaseCatInfo,
   getCatByAlias,
+  updateCat,
 };

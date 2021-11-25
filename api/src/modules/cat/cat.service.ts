@@ -5,6 +5,7 @@ import { ModelType } from '@typegoose/typegoose/lib/types';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { WINSTON_MODULE_PROVIDER } from '../winston/winston.constants';
 import { Logger } from 'winston';
+import { BaseCatResponse } from './types/cat-base-response.type';
 
 @Injectable()
 export class CatService {
@@ -13,6 +14,7 @@ export class CatService {
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
+  //TODO выпилить если не используется
   async findAll() {
     this.logger.info('Get all cats');
     return this.catModel.find({}).exec();
@@ -23,7 +25,11 @@ export class CatService {
     return this.catModel.create(dto);
   }
 
-  async getShortCatsInfo() {
+  /**
+   * Вернуть данные по котам, без загрузки ВСЕХ фото и характеристик котов.
+   * Загружаем только ГЛАВНОЕ фото
+   */
+  async getBaseCatsInfo(): Promise<BaseCatResponse> {
     this.logger.info('Get short cat info');
     return this.catModel
       .aggregate()
