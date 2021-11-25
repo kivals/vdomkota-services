@@ -8,9 +8,6 @@ export enum Sex {
 
 class CatCharacteristic {
   @prop()
-  alias: string;
-
-  @prop()
   name: string;
 
   @prop()
@@ -28,7 +25,7 @@ export class CatModel extends TimeStamps {
   @prop()
   age: number;
 
-  @prop({ default: false } )
+  @prop({ default: false })
   isKitten: boolean;
 
   @prop()

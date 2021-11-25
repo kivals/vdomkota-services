@@ -6,6 +6,7 @@ import { CreateCatDto } from './dto/create-cat.dto';
 import { WINSTON_MODULE_PROVIDER } from '../winston/winston.constants';
 import { Logger } from 'winston';
 import { BaseCatResponse, CatByAliasResponse } from './types/cat-base-response.type';
+import { UpdateCatDto } from './dto/update-cat.dto';
 
 @Injectable()
 export class CatService {
@@ -73,5 +74,11 @@ export class CatService {
         characteristics: 1,
         photos: 1,
       });
+  }
+
+  async updateCat(alias: string, dto: UpdateCatDto) {
+    return this.catModel
+      .findOneAndUpdate({ alias }, dto, { new: true, projection: { _id: 0, createdAt: 0, updatedAt: 0, __v: 0 } })
+      .exec();
   }
 }
