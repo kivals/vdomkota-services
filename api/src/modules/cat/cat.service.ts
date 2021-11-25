@@ -5,7 +5,7 @@ import { ModelType } from '@typegoose/typegoose/lib/types';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { WINSTON_MODULE_PROVIDER } from '../winston/winston.constants';
 import { Logger } from 'winston';
-import { BaseCatResponse } from './types/cat-base-response.type';
+import { BaseCatResponse, CatByAliasResponse } from './types/cat-base-response.type';
 
 @Injectable()
 export class CatService {
@@ -52,7 +52,7 @@ export class CatService {
       });
   }
 
-  async getCatByAlias(alias: string) {
+  async getCatByAlias(alias: string): Promise<CatByAliasResponse[]> {
     this.logger.info(`Get cat by alias: ${alias}`);
     return this.catModel
       .aggregate()

@@ -14,12 +14,11 @@ const getBaseCatInfo = () => {
 
 const getCatByAlias = (alias) => {
   return axios.get(`/api/cats/${alias}`).then(({ data }) => {
-    const cat = data[0];
-    cat.photos = cat.photos.map((photo) => ({
+    data.photos = data.photos.map((photo) => ({
       ...photo,
       path: `${photo.path}.jpg`,
     }));
-    return cat;
+    return data;
   });
 };
 

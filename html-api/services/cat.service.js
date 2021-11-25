@@ -14,6 +14,7 @@ const getSexCatName = (cat) => {
   return cat.sex === 'male' ? `Кот ${cat.name}` : `Кошка ${cat.name}`;
 };
 
+//TODO обработка ошибок
 const getBaseCatInfo = async () => {
   const response = await axios.get(`${apiUrl}cats/base`);
   console.log(response.data);
@@ -26,8 +27,8 @@ const getBaseCatInfo = async () => {
 };
 
 const getCatByAlias = async (alias) => {
-  const response = await axios.get(`${apiUrl}cats/${alias}`);
-  return response.data[0];
+  const { data } = await axios.get(`${apiUrl}cats/${alias}`);
+  return data;
 };
 
 module.exports = {
