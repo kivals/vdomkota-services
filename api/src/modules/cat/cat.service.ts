@@ -7,6 +7,9 @@ import { WINSTON_MODULE_PROVIDER } from '../winston/winston.constants';
 import { Logger } from 'winston';
 import { BaseCatResponse, CatByAliasResponse } from './types/cat-base-response.type';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import CatNotFoundException from '../../exeptions/cat-not-found.exception';
+
+import mongoose from 'mongoose';
 
 @Injectable()
 export class CatService {
@@ -55,7 +58,7 @@ export class CatService {
 
   async getCatByAlias(alias: string): Promise<CatByAliasResponse[]> {
     this.logger.info(`Get cat by alias: ${alias}`);
-    return this.catModel
+    const foundedCat = await this.catModel
       .aggregate()
       .match({ alias })
       .limit(1)
@@ -74,11 +77,30 @@ export class CatService {
         characteristics: 1,
         photos: 1,
       });
+    console.log(foundedCat);
+    if (foundedCat.length) {
+      return foundedCat;
+    }
+    throw new CatNotFoundException(alias);
   }
 
-  async updateCat(alias: string, dto: UpdateCatDto) {
-    return this.catModel
+  async updateCat(alias: string, dto: UpdateCatDto): Promise<CatModel> {
+    const updatedCat: CatModel = await this.catModel
       .findOneAndUpdate({ alias }, dto, { new: true, projection: { _id: 0, createdAt: 0, updatedAt: 0, __v: 0 } })
       .exec();
+    if (updatedCat) {
+      return updatedCat;
+    }
+    throw new CatNotFoundException(alias);
+  }
+
+  async deleteCat(alias: string) {
+    const cat = await this.catModel.findOne({ alias });
+    if (!cat) {
+      throw new CatNotFoundException(alias);
+    }
+    //1. Удаляем данные
+
+    //2. Удаляем связанные фотки
   }
 }
