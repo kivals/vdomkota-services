@@ -10,6 +10,7 @@ import { PhotoModule } from './modules/photo/photo.module';
 import { MigrationModule } from './modules/migration/migration.module';
 import { WinstonModule } from './modules/winston/winston.module';
 import { getWinstonConfig } from './configs/winston.config';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { getWinstonConfig } from './configs/winston.config';
       inject: [ConfigService],
       useFactory: getWinstonConfig,
     }),
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
