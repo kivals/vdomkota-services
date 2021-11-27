@@ -1,5 +1,5 @@
 <template>
-  <form class="cat-form" action="#">
+  <div class="cat-form">
     <div class="cat-form__content">
       <div class="cat-form__body">
         <app-input
@@ -45,14 +45,14 @@
       :row-count="10"
       label="История котика"
     />
-  </form>
+  </div>
 </template>
 
 <script>
-import AppInput from "@/components/ui/AppInput";
+import AppInput from "@/components/ui/BaseInput";
 import CatCharacteristics from "@/components/cat/CatCharacteristics";
 import CatAddCharacteristic from "@/components/cat/CatAddCharacteristic";
-import AppTextarea from "@/components/ui/AppTextarea";
+import AppTextarea from "@/components/ui/BaseTextarea";
 
 export default {
   name: "CatForm",

@@ -4,21 +4,31 @@
       <div class="cat-avatar__photo zoom-in">
         <img :src="avatarUrl" alt="Аватарка котика" />
       </div>
+      <!--      TODO БЛОК КНОПОК ВЫНЕСТИ В ОТДЕЛЬНЫЙ КОМПОНЕНТ     -->
       <template v-if="isEdit">
-        <app-button
+        <base-button
           class="cat-avatar__btn"
-          title="Отменить"
-          type="primary"
+          title="Отмена"
+          type="secondary"
           @click="cancelHandler"
         />
 
-        <app-button
+        <base-button
           class="cat-avatar__btn"
           title="Удалить котика"
           type="danger"
         />
+
+        <base-uploader class="cat-avatar__btn" @uploadImage="uploadImage" />
+
+        <base-button
+          class="cat-avatar__btn"
+          title="Сохранить"
+          type="success"
+          @click="save"
+        />
       </template>
-      <app-button
+      <base-button
         v-else
         class="cat-avatar__btn"
         title="Редактировать"
@@ -30,14 +40,16 @@
 </template>
 
 <script>
-import AppButton from "@/components/ui/AppButton";
+import BaseButton from "@/components/ui/BaseButton";
+import BaseUploader from "@/components/ui/BaseUploader";
 
 export default {
   name: "CatAvatar",
   components: {
-    AppButton,
+    BaseButton,
+    BaseUploader,
   },
-  emits: ["edit", "cancel"],
+  emits: ["edit", "cancel", "uploadImage", "save"],
   props: {
     avatarUrl: {
       type: String,
@@ -54,6 +66,12 @@ export default {
     },
     cancelHandler() {
       this.$emit("cancel");
+    },
+    uploadImage(payload) {
+      this.$emit("uploadImage", payload);
+    },
+    save() {
+      this.$emit("save");
     },
   },
 };

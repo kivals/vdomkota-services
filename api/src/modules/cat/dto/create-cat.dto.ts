@@ -25,8 +25,6 @@ export class CreateCatDto {
 }
 
 class CatCharacteristic {
-  alias: string;
-
   name: string;
 
   value: string;

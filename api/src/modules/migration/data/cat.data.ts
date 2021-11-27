@@ -1,7 +1,7 @@
 import { CreateCatDto } from '../../cat/dto/create-cat.dto';
-import { PhotoDto } from "../../photo/dto/photo.dto";
-import { Types } from "mongoose";
-import {Sex} from "../../cat/cat.model";
+import { PhotoDto } from '../../photo/dto/photo.dto';
+import { Types } from 'mongoose';
+import { Sex } from '../../cat/cat.model';
 
 // ВАЖЕН! порядок следования котов
 export const generateCats = (): CreateCatDto[] => {
@@ -24,10 +24,9 @@ export const generateCats = (): CreateCatDto[] => {
       photoLimit: 6,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -48,10 +47,9 @@ export const generateCats = (): CreateCatDto[] => {
       hasHome: false,
       photoLimit: 7,
       characteristics: [
-        { alias: 'alias1', name: 'Стерилизована', value: 'да' },
-        { alias: 'alias2', name: 'Привита', value: 'да' },
+        { name: 'Стерилизована', value: 'да' },
+        { name: 'Привита', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -76,10 +74,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 24,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -101,10 +98,9 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 12,
       characteristics: [
-        { alias: 'alias1', name: 'Стерилизована', value: 'да' },
-        { alias: 'alias2', name: 'Привита', value: 'да' },
+        { name: 'Стерилизована', value: 'да' },
+        { name: 'Привита', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -127,10 +123,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 24,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -150,10 +145,9 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 24,
       characteristics: [
-        { alias: 'alias1', name: 'Стерилизована', value: 'да' },
-        { alias: 'alias2', name: 'Привита', value: 'да' },
+        { name: 'Стерилизована', value: 'да' },
+        { name: 'Привита', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -176,10 +170,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 12,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -202,10 +195,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 36,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -232,10 +224,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 24,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'да' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -263,10 +254,9 @@ export const generateCats = (): CreateCatDto[] => {
       shelterPutDate: new Date(),
       age: 12,
       characteristics: [
-        { alias: 'alias1', name: 'Стерилизована', value: 'да' },
-        { alias: 'alias2', name: 'Привита', value: 'да' },
+        { name: 'Стерилизована', value: 'да' },
+        { name: 'Привита', value: 'да' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -299,10 +289,9 @@ export const generateCats = (): CreateCatDto[] => {
       age: 24,
       hasHome: false,
       characteristics: [
-        { alias: 'alias1', name: 'Кастрирован', value: 'да' },
-        { alias: 'alias2', name: 'Привит', value: 'нет' },
+        { name: 'Кастрирован', value: 'да' },
+        { name: 'Привит', value: 'нет' },
         {
-          alias: 'alias3',
           name: 'Анализы на ВЛК и ВИК',
           value: 'отрицательные',
         },
@@ -311,11 +300,7 @@ export const generateCats = (): CreateCatDto[] => {
   ];
 };
 
-export const generatePhotos = (
-  catId: string,
-  alias: string,
-  limit = 10,
-): PhotoDto[] => {
+export const generatePhotos = (catId: string, alias: string, limit = 10): PhotoDto[] => {
   return [...Array(limit)].map((value, index) => ({
     catId: new Types.ObjectId(catId),
     path: `/cats/${alias}/${alias.toLowerCase()}-${index + 1}`,

@@ -19,7 +19,7 @@
 import AppPageTitle from "@/components/AppPageTitle";
 import CatPreviewCard from "@/components/cat/CatPreviewCard";
 import catsApi from "@/api/cat";
-import AppLoader from "@/components/ui/AppLoader";
+import AppLoader from "@/components/ui/BaseLoader";
 import CatFilter from "@/components/cat/CatFilter";
 
 export default {
@@ -46,7 +46,7 @@ export default {
   },
   async mounted() {
     try {
-      this.cats = await catsApi.getListOfCats();
+      this.cats = await catsApi.getBaseCatInfo();
       this.isLoading = false;
     } catch (e) {
       console.error(e);

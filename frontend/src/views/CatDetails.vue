@@ -8,10 +8,12 @@
       </div>
       <div class="cat-card__body">
         <cat-avatar
-          :avatar-url="cat.photos[0]"
+          :avatar-url="avatarUrl"
           :isEdit="isEdit"
           @edit="isEdit = true"
           @cancel="cancelEditHandler"
+          @uploadImage="uploadImage"
+          @save="save"
           class="cat-card__avatar"
         />
         <div class="cat-card__info">
@@ -24,7 +26,12 @@
         </div>
       </div>
     </div>
-    <cat-photos-list />
+    <cat-photos-list
+      :photos="photos"
+      :isEdit="isEdit"
+      @changeMainPhoto="changeMainPhoto"
+      @deletePhoto="deletePhoto"
+    />
   </div>
   <pre>
     {{ cat }}
@@ -33,7 +40,7 @@
 
 <script>
 import catsApi from "@/api/cat";
-import AppLoader from "@/components/ui/AppLoader";
+import AppLoader from "@/components/ui/BaseLoader";
 import CatAvatar from "@/components/cat/CatAvatar";
 import CatForm from "@/components/cat/CatForm";
 import CatPhotosList from "@/components/cat/CatPhotosList";
@@ -55,6 +62,12 @@ export default {
   computed: {
     isLoading() {
       return this.$store.state.isLoading;
+    },
+    avatarUrl() {
+      return this.cat.photos.find((p) => p.isMain)?.path;
+    },
+    photos() {
+      return this.cat.photos.filter((ph) => !ph.isDeleted);
     },
   },
   methods: {
@@ -80,6 +93,41 @@ export default {
       this.cat.characteristics = this.cat.characteristics.filter(
         (ch) => ch.alias !== payload
       );
+    },
+    changeMainPhoto(photo) {
+      if (photo.isNew) {
+        //TODO ОПОВЕЩЕНИЕ
+        console.error("Нельзя ставить на главную, еще несохраненное фото");
+        return;
+      }
+      const currentMainPhoto = this.cat.photos.find((ph) => ph.isMain);
+      currentMainPhoto.isMain = false;
+      photo.isMain = true;
+    },
+    deletePhoto(photo) {
+      if (photo.isNew) {
+        this.cat.photos = this.cat.photos.filter((ph) => ph !== photo);
+        return;
+      }
+      photo.isDeleted = true;
+      if (photo.isMain) {
+        photo.isMain = false;
+        this.photos[0].isMain = true;
+      }
+    },
+    uploadImage(payload) {
+      this.cat.photos.push({ path: payload, isNew: true });
+    },
+    async save() {
+      try {
+        this.$store.commit("startLoading");
+        const catAlias = this.$route.params.alias;
+        await catsApi.updateCat(catAlias, this.cat);
+        this.$store.commit("successLoading");
+      } catch (e) {
+        this.$store.commit("failLoading");
+        console.error(e);
+      }
     },
   },
   async created() {
