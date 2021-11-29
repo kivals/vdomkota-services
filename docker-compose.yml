@@ -22,6 +22,8 @@ services:
       - MONGODB_HOST=api-db
       - MONGODB_PORT=27017
       - MONGODB_DATABASE=vdomkota
+      - LIMIT_FILES_FOLDER=10
+      - MAX_FILE_SIZE=80000
       - APP_ENV=prod
     volumes:
       - ./static/images:/usr/src/app/uploads
