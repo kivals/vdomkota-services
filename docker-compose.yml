@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   frontend:
@@ -12,10 +12,11 @@ services:
       - vdomkota-service-network
 
   api:
-    build: ./api
     container_name: vdomkota-docker-api
-    command: npm run start:prod
-    restart: unless-stopped
+    build:
+      context: ./api
+      target: production
+#    command: npm run start:prod
     environment:
       - APP_PORT=3001
       - MONGODB_HOST=api-db
@@ -28,6 +29,7 @@ services:
       - api-db
     networks:
       - vdomkota-service-network
+    restart: unless-stopped
 
   api-db:
     image: mongo:latest

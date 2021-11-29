@@ -1,19 +1,31 @@
-FROM node:13.12.0-alpine
-
-RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
+# ------------------------development------------------------------
+FROM node:14.11.0-alpine AS development
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 
-USER node
+RUN npm install glob rimraf && npm install --only=development
 
-#for proxy ssl certificate
-#RUN npm config set registry http://registry.npmjs.org/
-#RUN npm set strict-ssl false
-RUN npm i
-
-# Copy app source code
-COPY --chown=node:node . .
+COPY . .
 
 RUN npm run build
+
+# ------------------------production------------------------------
+FROM node:14.11.0-alpine AS production
+
+ARG NODE_ENV=production
+
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install --only=production
+
+#COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]
