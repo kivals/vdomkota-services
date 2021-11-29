@@ -2,20 +2,28 @@ import { Injectable } from '@nestjs/common';
 import { path } from 'app-root-path';
 import { ensureDir, writeFile } from 'fs-extra';
 import * as sharp from 'sharp';
+import { MFile } from './mfile.class';
+import { IFileElementResponse } from './dto/file-element.response';
 
 @Injectable()
 export class FilesService {
-  async saveFiles(files: Express.Multer.File[], folderName: string) {
+  /**
+   * Сохранить файлы на устройстве
+   * @param files список объектов файлов
+   * @param folderName конечная директория для сохранения
+   */
+  async saveFiles(files: MFile[], folderName: string) {
     const uploadFolder = this.buildUploadPath(folderName.toLowerCase());
-    console.log(uploadFolder);
     // Создаем папку, если нет
     await ensureDir(uploadFolder);
-    const res: any[] = [];
+
+    const res: IFileElementResponse[] = [];
     for (const file of files) {
-      console.log(file);
-      await writeFile(`${uploadFolder}/${file.originalname}`, file.buffer);
+      const fileName = `${Date.now()}--${file.originalname}`;
+      await writeFile(`${uploadFolder}/${fileName}`, file.buffer);
       res.push({
-        url: `${folderName}/${file.originalname}`,
+        url: `${folderName}/${fileName}`,
+        name: fileName,
       });
     }
 
@@ -36,5 +44,13 @@ export class FilesService {
    */
   convertToWebP(file: Buffer) {
     return sharp(file).webp().toBuffer();
+  }
+
+  /**
+   * Конвертировать в формат JPG
+   * @param file буфер файла
+   */
+  convertToJPG(file: Buffer) {
+    return sharp(file).toFormat('jpeg', { mozjpeg: true }).toBuffer();
   }
 }
