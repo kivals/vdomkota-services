@@ -1,6 +1,13 @@
 <template>
   <app-loader v-if="isLoading" />
   <div v-else class="cat-details">
+    <base-modal v-show="isModalVisible" @close="closeModal">
+      <template v-slot:header> This is a new modal header. </template>
+
+      <template v-slot:body> This is a new modal body. </template>
+
+      <template v-slot:footer> This is a new modal footer. </template>
+    </base-modal>
     <!-- TODO вынести в отдельный компонент -->
     <div class="cat-details__info cat-card">
       <div class="cat-card__header">
@@ -44,6 +51,7 @@ import AppLoader from "@/components/ui/BaseLoader";
 import CatAvatar from "@/components/cat/CatAvatar";
 import CatForm from "@/components/cat/CatForm";
 import CatPhotosList from "@/components/cat/CatPhotosList";
+import BaseModal from "@/components/ui/BaseModal";
 
 export default {
   name: "CatDetails",
@@ -52,11 +60,13 @@ export default {
     CatAvatar,
     CatForm,
     CatPhotosList,
+    BaseModal,
   },
   data() {
     return {
       cat: null,
       isEdit: false,
+      isModalVisible: false,
     };
   },
   computed: {
@@ -71,6 +81,12 @@ export default {
     },
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
     async cancelEditHandler() {
       await this.loadCat();
       this.isEdit = false;
@@ -119,15 +135,18 @@ export default {
       this.cat.photos.push({ path: payload, isNew: true });
     },
     async save() {
-      try {
-        this.$store.commit("startLoading");
-        const catAlias = this.$route.params.alias;
-        await catsApi.updateCat(catAlias, this.cat);
-        this.$store.commit("successLoading");
-      } catch (e) {
-        this.$store.commit("failLoading");
-        console.error(e);
-      }
+      this.showModal();
+
+      // try {
+      //   this.$store.commit("startLoading");
+      //   this.showModal();
+      //   const catAlias = this.$route.params.alias;
+      //   await catsApi.updateCat(catAlias, this.cat);
+      //   this.$store.commit("successLoading");
+      // } catch (e) {
+      //   this.$store.commit("failLoading");
+      //   console.error(e);
+      // }
     },
   },
   async created() {
