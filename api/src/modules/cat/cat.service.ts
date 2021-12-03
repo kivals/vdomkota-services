@@ -77,7 +77,6 @@ export class CatService {
         characteristics: 1,
         photos: 1,
       });
-    console.log(foundedCat);
     if (foundedCat.length) {
       return foundedCat;
     }

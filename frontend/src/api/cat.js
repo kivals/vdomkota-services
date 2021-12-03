@@ -22,10 +22,18 @@ const getCatByAlias = (alias) => {
   });
 };
 
-const updateCat = (alias, savedCat) => {
-  return axios.put(`/api/cats/${alias}`, { cat: savedCat }).then((response) => {
-    console.log(response);
-  });
+const updateCat = (alias, { name, age, info, characteristics }) => {
+  return axios
+    .put(`/api/cats/${alias}`, {
+      name,
+      age,
+      info,
+      characteristics,
+      other: "gogogogo",
+    })
+    .then((response) => {
+      console.log(response);
+    });
 };
 
 export default {
