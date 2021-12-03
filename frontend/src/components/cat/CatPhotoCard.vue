@@ -1,11 +1,15 @@
 <template>
-  <div class="cat-photo-card zoom-in">
+  <div class="cat-photo-card zoom-in" :class="{ disabled: isDeleted }">
     <div class="cat-photo-card__content">
       <div class="cat-photo-card__photo">
         <img :src="url" alt="" />
       </div>
 
-      <base-mark v-if="isNew" class="cat-photo-card__mark" title="Новое" />
+      <base-mark
+        v-if="isNew || isDeleted"
+        class="cat-photo-card__mark"
+        :title="getMarkText"
+      />
       <base-dropdown class="cat-photo-card__dropdown" v-if="isEdit">
         <template v-slot:toggler>
           <a class="cat-photo-dropdown__toggler">
@@ -113,6 +117,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    getMarkText() {
+      return this.isNew ? "Новое" : "Удалить";
+    },
   },
   methods: {
     onMainHandler() {
@@ -135,6 +148,11 @@ export default {
     position: relative;
     padding: 2rem;
     border-radius: 0.375rem;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
   }
 
   &__photo {

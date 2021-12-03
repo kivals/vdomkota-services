@@ -34,7 +34,7 @@
       </div>
     </div>
     <cat-photos-list
-      :photos="photos"
+      :photos="cat.photos"
       :isEdit="isEdit"
       @changeMainPhoto="changeMainPhoto"
       @deletePhoto="deletePhoto"
@@ -76,7 +76,7 @@ export default {
     avatarUrl() {
       return this.cat.photos.find((p) => p.isMain)?.path;
     },
-    photos() {
+    notDeletedPhotos() {
       return this.cat.photos.filter((ph) => !ph.isDeleted);
     },
   },
@@ -125,28 +125,28 @@ export default {
         this.cat.photos = this.cat.photos.filter((ph) => ph !== photo);
         return;
       }
+      if (this.notDeletedPhotos.length === 1) {
+        //TODO ОПОВЕЩЕНИЕ
+        console.error("Нельзя удалять абсолютно все фото");
+        return;
+      }
       photo.isDeleted = true;
       if (photo.isMain) {
         photo.isMain = false;
-        this.photos[0].isMain = true;
+        this.notDeletedPhotos[0].isMain = true;
       }
     },
     uploadImage(payload) {
       this.cat.photos.push({ path: payload, isNew: true });
     },
     async save() {
-      this.showModal();
-
-      // try {
-      //   this.$store.commit("startLoading");
-      //   this.showModal();
-      //   const catAlias = this.$route.params.alias;
-      //   await catsApi.updateCat(catAlias, this.cat);
-      //   this.$store.commit("successLoading");
-      // } catch (e) {
-      //   this.$store.commit("failLoading");
-      //   console.error(e);
-      // }
+      try {
+        this.showModal();
+        const catAlias = this.$route.params.alias;
+        await catsApi.updateCat(catAlias, this.cat);
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
   async created() {
