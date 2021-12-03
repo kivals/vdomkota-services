@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CatService } from './cat.service';
 import { BaseCatResponse, CatByAliasResponse } from './types/cat-base-response.type';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -28,6 +28,7 @@ export class CatController {
     return this.catService.getCatByAlias(alias).then((cat) => cat[0]);
   }
 
+  @UsePipes(new ValidationPipe())
   @Put(':alias')
   async updateCat(@Param('alias') alias: string, @Body() dto: UpdateCatDto): Promise<CatModel> {
     return this.catService.updateCat(alias, dto);

@@ -5,7 +5,7 @@ export class UpdateCatDto {
   @IsString()
   name: string;
 
-  @IsNumber()
+  @IsNumber({}, { message: 'Возраст должен быть числом' })
   age: number;
 
   @IsString()
