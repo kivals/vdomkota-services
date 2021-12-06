@@ -18,9 +18,9 @@
 <script>
 import AppPageTitle from "@/components/AppPageTitle";
 import CatPreviewCard from "@/components/cat/CatPreviewCard";
-import catsApi from "@/api/cat";
 import AppLoader from "@/components/ui/BaseLoader";
 import CatFilter from "@/components/cat/CatFilter";
+import { getCats } from "@/api/cat.api";
 
 export default {
   name: "CatsPage",
@@ -32,12 +32,14 @@ export default {
   },
   data() {
     return {
-      isLoading: true,
       cats: [],
       searchCat: "",
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
     filteredCats() {
       return this.cats.filter((cat) =>
         cat.name.toLowerCase().includes(this.searchCat.toLowerCase())
@@ -46,11 +48,12 @@ export default {
   },
   async mounted() {
     try {
-      this.cats = await catsApi.getBaseCatInfo();
-      this.isLoading = false;
+      this.$store.commit("startLoading");
+      this.cats = await getCats();
+      this.$store.commit("successLoading");
     } catch (e) {
+      this.$store.commit("failLoading");
       console.error(e);
-      this.isLoading = false;
     }
   },
 };

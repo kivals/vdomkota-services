@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import catsApi from "@/api/cat";
 import AppLoader from "@/components/ui/BaseLoader";
 import CatAvatar from "@/components/cat/CatAvatar";
 import CatForm from "@/components/cat/CatForm";
 import CatPhotosList from "@/components/cat/CatPhotosList";
 import BaseModal from "@/components/ui/BaseModal";
+import { getCatByAlias, updateCat } from "@/api/cat.api";
 
 export default {
   name: "CatDetails",
@@ -95,7 +95,7 @@ export default {
       try {
         this.$store.commit("startLoading");
         const catAlias = this.$route.params.alias;
-        this.cat = await catsApi.getCatByAlias(catAlias);
+        this.cat = await getCatByAlias(catAlias);
         this.$store.commit("successLoading");
       } catch (e) {
         this.$store.commit("failLoading");
@@ -143,7 +143,7 @@ export default {
       try {
         this.showModal();
         const catAlias = this.$route.params.alias;
-        await catsApi.updateCat(catAlias, this.cat);
+        await updateCat(catAlias, this.cat);
       } catch (e) {
         console.error(e);
       }
