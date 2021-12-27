@@ -47,3 +47,25 @@ export const updateCat = (alias, data) => {
     data,
   });
 };
+
+/**
+ * Отправить запрос на создание новых фоток
+ * @param alias alias кота
+ * @param photos файлы фоток для сохранения
+ */
+export const createPhotosCat = (alias, photos) => {
+  const formData = new FormData();
+  formData.append("alias", alias);
+  photos.forEach((img) => {
+    formData.append("files", img);
+  });
+  return http({
+    url: `/photos/upload`,
+    method: "post",
+    data: formData,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

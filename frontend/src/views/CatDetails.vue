@@ -51,7 +51,7 @@ import CatAvatar from "@/components/cat/CatAvatar";
 import CatForm from "@/components/cat/CatForm";
 import CatPhotosList from "@/components/cat/CatPhotosList";
 import BaseModal from "@/components/ui/BaseModal";
-import { getCatByAlias, updateCat } from "@/api/cat.api";
+import { createPhotosCat, getCatByAlias, updateCat } from "@/api/cat.api";
 
 export default {
   name: "CatDetails",
@@ -137,13 +137,23 @@ export default {
       }
     },
     uploadImage(payload) {
-      this.cat.photos.push({ path: payload, isNew: true });
+      this.cat.photos.push({
+        // url для отображения на странице
+        path: URL.createObjectURL(payload),
+        // для отправки на сервер
+        image: payload,
+        isNew: true,
+      });
     },
     async save() {
       try {
         this.showModal();
         const catAlias = this.$route.params.alias;
+        const newPhotos = this.cat.photos
+          .filter((ph) => ph.isNew === true)
+          .map((ph) => ph.image);
         await updateCat(catAlias, this.cat);
+        await createPhotosCat(catAlias, newPhotos);
       } catch (e) {
         console.error(e);
       }

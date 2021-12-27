@@ -16,12 +16,7 @@ export default {
   },
   methods: {
     uploadImage(e) {
-      const image = e.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = (e) => {
-        this.$emit("uploadImage", e.target.result);
-      };
+      this.$emit("uploadImage", e.target.files[0]);
     },
   },
 };
