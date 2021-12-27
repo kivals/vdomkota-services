@@ -11,20 +11,16 @@ export class FilesController {
   @HttpCode(200)
   @UseInterceptors(FileInterceptor('files'))
   async uploadFile(@Body('alias') alias: string, @UploadedFile() file: Express.Multer.File) {
-    const filesToSave: MFile[] = [];
+    // Подготовить путь для папки назначения файла
     const path = this.filesService.buildUploadPath(alias.toLowerCase());
+
+    // Валидация файла от клиента
     this.filesService.validateFile(path, file);
 
-    const webpBuffer: Buffer = await this.filesService.convertToWebP(file.buffer);
-    const jpgBuffer: Buffer = await this.filesService.convertToJPG(webpBuffer);
-    filesToSave.push({
-      originalname: `${file.originalname.split('.')[0]}.jpg`,
-      buffer: jpgBuffer,
-    });
-    filesToSave.push({
-      originalname: `${file.originalname.split('.')[0]}.webp`,
-      buffer: webpBuffer,
-    });
-    return this.filesService.saveFiles(filesToSave, path);
+    // Конвертировать в необходимые форматы (jpg и webp)
+    const files: MFile[] = await this.filesService.prepareFilesBeforeSaving(file);
+
+    // Сохранение файлов
+    return this.filesService.saveFiles(files, path);
   }
 }

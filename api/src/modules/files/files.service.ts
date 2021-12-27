@@ -6,15 +6,19 @@ import { MFile } from './mfile.class';
 import { IFileElementResponse } from './dto/file-element.response';
 import { ConfigService } from '@nestjs/config';
 
+// Максимальная длина файла
+const MAX_FILE_NAME_LENGTH = 50;
+
 @Injectable()
 export class FilesService {
   constructor(private readonly configService: ConfigService) {}
+
   /**
    * Сохранить файлы на устройстве
    * @param files список объектов файлов
    * @param path конечная директория для сохранения
    */
-  async saveFiles(files: MFile[], path: string) {
+  public async saveFiles(files: MFile[], path: string) {
     // Создаем папку, если нет
     await ensureDir(path);
 
@@ -32,27 +36,34 @@ export class FilesService {
   }
 
   /**
-   * Собрать полный адрес папки
+   * Подготовить необходимые форматы
+   * @param file исходный файл
+   * @return MFile[] списков конвертированных файлов
+   */
+  public async prepareFilesBeforeSaving(file: Express.Multer.File): Promise<MFile[]> {
+    // Конвертируем файл в нужных разрешениях
+    const webpBuffer: Buffer = await this.convertToWebP(file.buffer);
+    const jpgBuffer: Buffer = await this.convertToJPG(webpBuffer);
+
+    const filesToSave: MFile[] = [];
+    filesToSave.push({
+      originalname: `${file.originalname.split('.')[0]}.jpg`,
+      buffer: jpgBuffer,
+    });
+    filesToSave.push({
+      originalname: `${file.originalname.split('.')[0]}.webp`,
+      buffer: webpBuffer,
+    });
+
+    return filesToSave;
+  }
+
+  /**
+   * Собрать полный адрес папки хранилища фоток котов
    * @param folder наименование папки
    */
-  buildUploadPath(folder: string) {
+  public buildUploadPath(folder: string) {
     return `${path}/uploads/cats/${folder}`;
-  }
-
-  /**
-   * Конвертировать в формат WebP
-   * @param file буфер файла
-   */
-  convertToWebP(file: Buffer) {
-    return sharp(file).webp().toBuffer();
-  }
-
-  /**
-   * Конвертировать в формат JPG
-   * @param file буфер файла
-   */
-  convertToJPG(file: Buffer) {
-    return sharp(file).toFormat('jpeg', { mozjpeg: true }).toBuffer();
   }
 
   /**
@@ -60,12 +71,12 @@ export class FilesService {
    * Проверки:
    *  - тип файла должен быть картинка
    *  - размер файла не больше чем в указано конфигурации
-   *  - лимит картинок не больше чем в указано в конфигурации
+   *  - лимит картинок в папке не больше чем в указано в конфигурации
    * @param path полный путь
    * @param file объект файла картинки
    * @throws BadRequestException
    */
-  validateFile(path: string, file: Express.Multer.File) {
+  public validateFile(path: string, file: Express.Multer.File) {
     if (!file.mimetype.includes('image')) {
       throw new BadRequestException(`Файл ${file.originalname} не может быть загружен, так как не является картинкой`);
     }
@@ -83,5 +94,23 @@ export class FilesService {
         } не может быть загружен, так как лимит изображений для кота = ${this.configService.get('LIMIT_FILES_FOLDER')}`,
       );
     }
+    // Обрезаем наименование, чтобы избежать длинных имен
+    file.originalname = file.originalname.substring(0, MAX_FILE_NAME_LENGTH);
+  }
+
+  /**
+   * Конвертировать в формат WebP
+   * @param file буфер файла
+   */
+  private async convertToWebP(file: Buffer) {
+    return sharp(file).webp().toBuffer();
+  }
+
+  /**
+   * Конвертировать в формат JPG
+   * @param file буфер файла
+   */
+  private async convertToJPG(file: Buffer) {
+    return sharp(file).toFormat('jpeg', { mozjpeg: true }).toBuffer();
   }
 }
